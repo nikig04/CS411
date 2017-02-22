@@ -1,0 +1,11 @@
+Browsing and filtering Recipes
+
+When I open the web app, I can see the weather forecast for the next week based on my current location.
+If I am not logged in, I must authenticate ENTER AUTHENTICATION METHOD HERE (see Authentication).
+When I click the "Find recipes" button, I can see the suggested recipes for each day along with their ingredients, as well as the reasons for choosing these ingredients like nutrient composition, whether the food is in season, etc.
+If I want to see new recipes, I can click "Find more recipes", which has replaced the "Find recipes" Button. A list of new recipes will appear.
+If I want to filter my results with some preferences, I can click the "Filter" tab, which will have a list of boxes that I can check to filter by, such as "Vegetarian" or "Mexican cuisine".
+
+See User Story 3 for adding recipes and going shopping.
+
+
