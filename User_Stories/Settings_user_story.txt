@@ -1,7 +1,5 @@
 Viewing	and Editing My Info
 
-
-
 After I	authenticate my	information and	log in for the first time, I am	immediately taken to the settings screen. This is where I will include general personalized information about myself including gender, age. 
 
 I will also be asked about my food choices including the kinds of meat I consume and how healthy I want to be. I can always reference back to this settings page to change any food choices and I can also edit the list of my favorite recipes here. 
