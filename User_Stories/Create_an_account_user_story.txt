@@ -1,8 +1,6 @@
 Creating an account
 
 I'm in the "Sign-in" page, and I'm a new user who wants to create an account. I click the "New User?" and get 
-directed into "Create an account" page. On this page, I can either click "Sign in with Google", at which point I will be asked for my
-google account credentials, or I can create local credentials by clicking "Create a new account". If i click "Create a new account",
-The first field asks for email address. The second field asks for username. Third field asks for password. 
-Fourth field asks for name (to be used in my profile). If I signed in with Google, I am directed back to the "Sign-in page".
-If I created local credentials, I click the "Create my account!" button and am directed back into the "Sign-in" page.
+directed into "Create an account" page. On this page, there are four fields. The first field asks for email address. 
+The second field asks for username. Third field asks for password. Fourth field asks for name (to be used in my profile). 
+After filling these four fields out, I click the "Create my account!" button and am directed back into the "Sign-in" page.
