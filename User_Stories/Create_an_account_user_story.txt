@@ -1,0 +1,6 @@
+Creating an account
+
+I'm in the "Sign-in" page, and I'm a new user who wants to create an account. I click the "New User?" and get 
+directed into "Create an account" page. On this page, there are four fields. The first field asks for email address. 
+The second field asks for username. Third field asks for password. Fourth field asks for name (to be used in my profile). 
+After filling these four fields out, I click the "Create my account!" button and am directed back into the "Sign-in" page.
