@@ -1,3 +1,14 @@
-We chose Python and Django as our platform to use for developing our solution. We chose this platform for a few reasons. First off, none of us have had any experience using a framework before or building apps in general. We know we have a lot to learn, so we thought it would be smartest to pick a language that we were familiar with, since we will be learning a lot regardless of what we pick. This limited us to Java and Python, but not all of our group knew Java, so we picked Python. We looked at the various platforms available for Python, and we decided on Django because it seems like it is widely used, well documented, good for building medium sized web apps, and has a powerful ORM with a lot of supported databases.
-One of the other frameworks that we looked at is Flask. However, we decided that Django was a better choice. The main reason for this was that Flask promotes itself as a lightweight microframework, good for building small apps. While our app may not be massively complicated, we didnt want to run into issues midway through our project where we wanted to implement some feature in a certain way, but we couldnt simply because our framework didnt offer that functionality. Since Django has been around for longer and has many more options for usage, we thought it the better choice. Additionally, we thought it would be a better idea to get experience working with a more widely-used framework that can be used for more heavyweight apps, because experience with a bigger and potentially more industry standard framework may be more likely to benefit us in our futures than a smaller microframework.
-
+We chose Python and Django as our platform to use for developing our solution. We chose this platform for a few reasons.
+First off, none of us have had any experience using a framework before or building apps in general. 
+We know we have a lot to learn, so we thought it would be smartest to pick a language that we were familiar with,
+since we will be learning a lot regardless of what we pick. This limited us to Java and Python, but not all of our group knew Java, 
+so we picked Python. We looked at the various platforms available for Python, and we decided on Django because it seems
+like it is widely used, well documented, good for building medium sized web apps, and has a powerful ORM with
+a lot of supported databases. One of the other frameworks that we looked at is Flask. However, we decided that Django was a better choice.
+The main reason for this was that Flask promotes itself as a lightweight microframework, good for building small apps.
+While our app may not be massively complicated, we didnt want to run into issues midway through our project where we 
+wanted to implement some feature in a certain way, but we couldnt simply because our framework didnt offer that functionality.
+Since Django has been around for longer and has many more options for usage, we thought it the better choice.
+Additionally, we thought it would be a better idea to get experience working with a more widely-used framework that can be used
+for more heavyweight apps, because experience with a bigger and potentially more industry standard framework may be more
+likely to benefit us in our futures than a smaller microframework.
