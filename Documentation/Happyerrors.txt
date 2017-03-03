@@ -1,7 +1,7 @@
 Happy Path:
 1A: Chooses local account / 1B: Chooses Google
 2A: Authentication request sent to database / 2B: Request app 
-3A: Returns token / 3B: Return app token
+3A: Returns token, authenticated with local credentials / 3B: Return app token
 (4-6 if choosing Google):
 4: Redirected to home page
 5: Google requests Login roken
