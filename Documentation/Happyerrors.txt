@@ -1,0 +1,10 @@
+Somethings that could go wrong:
+
+1- No account
+2- Incorrect password or username
+3- Forgot username and password
+
+1A- Refreshes and redirects to a sign up page
+2A- Refreshes and allows re-enter of both for a period of 3 tries. After that there is a time out session. If there is a valid user attached to the username, an email is sent to that user informing about the situation.
+3A- Refreshes and asked for email address to resend username or sends password
+
