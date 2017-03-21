@@ -1,0 +1,9 @@
+import requests
+response = requests.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=chicken&limitLicense=false&number=5&ranking=1",
+  headers={
+    "X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
+    "Accept": "application/json"
+  }
+)
+
+print(response.content)
