@@ -1,0 +1,144 @@
+<<<<<<< HEAD:Django/FoodWeatherAPI/FoodAPI/templates/FoodAPI/profile.html
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/static/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
+</head>
+<body>
+<h1 class="text-center"> Github User Data </h1>
+<div class="col-lg-12">
+        <style>
+          .form-signin {
+            max-width: 550px;
+            padding: 15px;
+            margin: 0 auto;
+          }    
+        </style>
+
+
+        <div class="container text-center">
+            <form class="form-signin" id="login_form" method="post" action="/FoodAPI/profile/">
+            
+              {% csrf_token %}
+            
+
+              <br>
+              <input type="text" name="user" class="form-control" placeholder="Github User Name, e.g: DrkSephy" value="" required autofocus>
+              <br>
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Get Data</button>
+            </form>
+        </div>
+    
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped tablesorter">
+                <thead>
+                <tr>
+                  <th class="header"> Name of Ingredient<i class="icon-sort"></i></th>
+                  <th class="header"> Ingredient <i class="icon-sort"></i></th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+            
+            {% for key in data %}
+                <tr>
+                    <td>{{ key.name_of_ingredient }}</td>
+                    <td>{{ key.image_url }}</td>
+                    
+            {% endfor %}
+            
+            </tbody>
+            </table>
+        </div>
+=======
+  <!doctype html>
+
+  <html lang="en">
+
+  <head>
+
+    <title>Feather</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/main.css" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+
+
+    <style>
+
+    body {
+      background-image: url("./styles/img/home2.jpeg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+      overflow-x: hidden;
+    }
+
+    h2 {
+      font-weight: 300;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    </style>
+
+  </head>
+
+  <body ng-app="indexApp">
+
+    <div id="overlay"></div>
+    <header></header>
+    <br><br><br>
+    <div id="loading" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">
+    </div>
+    <form class="form-signin" id="login_form" method="post" action="/FoodAPI/recipes/">
+    	{% csrf_token %}
+      <div class="panel panel-default col-md-7 col-centered" id="homepage-panel">
+        <h4><strong>Please enter an ingredient.</strong></h4>
+        <br>
+        <div class="col-sm-10 input-group" id="content">
+          <input type="text" name="da_input" class="form-control box-shadow--3dp" placeholder="Chicken, eggs, spinach" id="search-input">
+          <div class="input-group-btn">
+            <button class="btn btn-default box-shadow--3dp" id="search-btn"type="submit" >Search</button>
+          </div>
+        </div>
+
+    </form>
+    <br>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped tablesorter">
+        <thead>
+          <tr>
+            <th class="header"> Name of Ingredient<i class="icon-sort"></i></th>
+            <th class="header"> Image <i class="icon-sort"></i></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for key in data %}
+          <tr>
+            <td>{{ key.name_of_ingredient }}</td>
+            <td>{{ key.image_url }}</td>
+
+             {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+>>>>>>> c1c598ec53422fc9ed0ba038777300377fe487c8:Django/FoodWeatherAPI/FoodAPI/templates/FoodAPI/recipes.html
+    </div>
+</body>
+</html>
+

@@ -1,8 +1,0 @@
-{% extends "story/base.html" %}
-
-{% block content %}
-<u1>
-{% for line in lines %}
-	<li style="color:{% cycle 'red' 'green' %}">{{ line.text }}</li>
-{% endfor %}
-{% endblock %}
