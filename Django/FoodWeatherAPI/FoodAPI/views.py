@@ -25,7 +25,6 @@ def recipes(request):
 		for data in jsonList:
 			userData['name_of_ingredient'] = data['title']
 			userData['image_url'] = data['image']
-		parsedData.append(userData)
-		# print (parsedData)
-		# print(jsonList[0])
+			parsedData.append(userData)
+			userData = {}
 	return render(request, 'FoodAPI/recipes.html', {'data':parsedData})
