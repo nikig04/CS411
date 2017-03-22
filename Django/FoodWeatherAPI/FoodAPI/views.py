@@ -8,7 +8,7 @@ def secondView(request):
 def profile(request):
 	parsedData =[]
 	if request.POST:
-		ingredient = request.POST.get('user')
+		ingredient = request.POST.get('da_input')
 		jsonList = []
 		req = requests.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=' + ingredient + '&limitLicense=false&number=5&ranking=1',
 			headers={
