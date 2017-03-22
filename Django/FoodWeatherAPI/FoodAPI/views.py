@@ -1,14 +1,17 @@
 from django.shortcuts import render, HttpResponse
 import requests
 import json
+
 def index(request):
 	return HttpResponse('Hello World!')
+
 def secondView(request):
 	return HttpResponse('My second view!')
-def profile(request):
+	
+def recipes(request):
 	parsedData =[]
 	if request.POST:
-		ingredient = request.POST.get('user')
+		ingredient = request.POST.get('da_input')
 		jsonList = []
 		req = requests.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=' + ingredient + '&limitLicense=false&number=5&ranking=1',
 			headers={
@@ -25,4 +28,4 @@ def profile(request):
 		parsedData.append(userData)
 		# print (parsedData)
 		# print(jsonList[0])
-	return render(request, 'FoodAPI/profile.html', {'data':parsedData})
+	return render(request, 'FoodAPI/recipes.html', {'data':parsedData})
