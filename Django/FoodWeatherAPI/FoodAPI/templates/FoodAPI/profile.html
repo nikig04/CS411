@@ -1,46 +1,44 @@
+  <!doctype html>
 
-
-<!doctype html>
-
-<html lang="en">
+  <html lang="en">
 
   <head>
 
-      <title>Feather</title>
+    <title>Feather</title>
 
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
-      <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
-      <link rel="stylesheet" href="./styles/main.css" type="text/css">
-      <link rel="icon" href="./styles/img/waitster-favicon.png" sizes="16x16">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/main.css" type="text/css">
 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-      <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
-      
-     
-      <style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+    
+    
+    <style>
 
-          body {
-              background-image: url(./styles/img/home2.jpeg);
-              background-size: 100%;
-              background-repeat: no-repeat;
-              overflow-x: hidden;
-          }
+    body {
+      background-image: url(./styles/img/home2.jpeg);
+      background-size: 100%;
+      background-repeat: no-repeat;
+      overflow-x: hidden;
+    }
 
-          h2 {
-              font-weight: 300;
-          }
+    h2 {
+      font-weight: 300;
+    }
 
-          p {
-              font-size: 16px;
-          }
+    p {
+      font-size: 16px;
+    }
 
-      </style>
+    </style>
 
   </head>
+
   <body ng-app="indexApp">
 
     <div id="overlay"></div>
@@ -48,37 +46,37 @@
     <br><br><br>
     <div id="loading" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">
     </div>
-     <form class="form-signin" id="login_form" method="post" action="/FoodAPI/profile/">
-    <div class="panel panel-default col-md-7 col-centered" id="homepage-panel">
+    <form class="form-signin" id="login_form" method="post" action="/FoodAPI/profile/">
+      <div class="panel panel-default col-md-7 col-centered" id="homepage-panel">
         <h4><strong>Please enter an ingredient.</strong></h4>
         <br>
-                <div class="col-sm-10 input-group" id="content">
-            <input type="text" class="form-control box-shadow--3dp" placeholder="Chicken, eggs, spinach" id="search-input">
-            <div class="input-group-btn">
-                <button class="btn btn-default box-shadow--3dp" id="search-btn"type="submit" >Search</button>
-            </div>
-                 </form>
+        <div class="col-sm-10 input-group" id="content">
+          <input type="text" class="form-control box-shadow--3dp" placeholder="Chicken, eggs, spinach" id="search-input">
+          <div class="input-group-btn">
+            <button class="btn btn-default box-shadow--3dp" id="search-btn"type="submit" >Search</button>
+          </div>
         </div>
-        <br>
+      </div>
+    </form>
+    <br>
     
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped tablesorter">
-                <thead>
-                <tr>
-                  <th class="header"> Name of Ingredient<i class="icon-sort"></i></th>
-                  <th class="header"> Ingredient <i class="icon-sort"></i></th>
-                  
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ key.name_of_ingredient }}</td>
-                    <td>{{ key.image_url }}</td>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped tablesorter">
+        <thead>
+          <tr>
+            <th class="header"> Name of Ingredient<i class="icon-sort"></i></th>
+            <th class="header"> Ingredient <i class="icon-sort"></i></th>
             
-            </tbody>
-            </table>
-        </div>
-    </div>
-</body>
-</html>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ key.name_of_ingredient }}</td>
+            <td>{{ key.image_url }}</td>
+            
+          </tbody>
+        </table>
+      </div>
+    </body>
+    </html>
 
