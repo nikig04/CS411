@@ -21,7 +21,7 @@
     <style>
 
     body {
-      background-image: url(./styles/img/home2.jpeg);
+      background-image: url("./styles/img/home2.jpeg");
       background-size: 100%;
       background-repeat: no-repeat;
       overflow-x: hidden;
@@ -46,9 +46,8 @@
     <br><br><br>
     <div id="loading" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">
     </div>
-    <form class="form-signin" id="login_form" method="post" action="/FoodAPI/profile/">
-
-              {% csrf_token %}
+    <form class="form-signin" id="login_form" method="post" action="/FoodAPI">
+    	{% csrf_token %}
       <div class="panel panel-default col-md-7 col-centered" id="homepage-panel">
         <h4><strong>Please enter an ingredient.</strong></h4>
         <br>
@@ -67,7 +66,7 @@
         <thead>
           <tr>
             <th class="header"> Name of Ingredient<i class="icon-sort"></i></th>
-            <th class="header"> Inage URL <i class="icon-sort"></i></th>
+            <th class="header"> Image <i class="icon-sort"></i></th>
 
           </tr>
         </thead>

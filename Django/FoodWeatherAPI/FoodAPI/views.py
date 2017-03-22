@@ -1,10 +1,13 @@
 from django.shortcuts import render, HttpResponse
 import requests
 import json
+
 def index(request):
 	return HttpResponse('Hello World!')
+
 def secondView(request):
 	return HttpResponse('My second view!')
+	
 def profile(request):
 	parsedData =[]
 	if request.POST:
