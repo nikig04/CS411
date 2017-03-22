@@ -1,12 +1,10 @@
-
-
 <!doctype html>
 
 <html lang="en">
 
   <head>
 
-      <title>Feather</title>
+      <title>Recipe</title>
 
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +18,18 @@
       <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
       
-     
+      <script src="scripts/simpleSearch.js"></script>
+
+      <script>
+          $(document).ready(function() {
+              $('#search-input').keypress(function(e) {
+                  if(e.keyCode == 13) {
+                      $('#search-btn').click();
+                  }
+              });
+          });
+      </script>
+
       <style>
 
           body {
@@ -41,42 +50,27 @@
       </style>
 
   </head>
+
   <body ng-app="indexApp">
 
     <div id="overlay"></div>
     <header></header>
     <br><br><br>
     <div id="loading" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">
+        
     </div>
     <div class="panel panel-default col-md-7 col-centered" id="homepage-panel">
         <h4><strong>Please enter an ingredient.</strong></h4>
         <br>
-                <div class="col-sm-10 input-group" id="content">
+       
+        <div class="col-sm-10 input-group" id="content">
             <input type="text" class="form-control box-shadow--3dp" placeholder="Chicken, eggs, spinach" id="search-input">
             <div class="input-group-btn">
-                <button class="btn btn-default box-shadow--3dp" id="search-btn"type="submit">Search</button>
+                <button class="btn btn-default box-shadow--3dp" type="submit" id="search-btn" onclick="search();">Search</button>
             </div>
         </div>
-        <br>
-    
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped tablesorter">
-                <thead>
-                <tr>
-                  <th class="header"> Name of Ingredient<i class="icon-sort"></i></th>
-                  <th class="header"> Ingredient <i class="icon-sort"></i></th>
-                  
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ key.name_of_ingredient }}</td>
-                    <td>{{ key.image_url }}</td>
-            
-            </tbody>
-            </table>
-        </div>
     </div>
-</body>
-</html>
 
+  </body>
+
+</html>
