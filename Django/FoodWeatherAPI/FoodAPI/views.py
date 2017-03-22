@@ -7,19 +7,22 @@ def secondView(request):
 	return HttpResponse('My second view!')
 def profile(request):
 	parsedData =[]
-	if request.method == 'POST':
-		username=request.POST.get('user')
+	if request.POST:
+		ingredient = request.POST.get('user')
 		jsonList = []
-		req = requests.get('https://api.github.com/users/'+ username)
+		req = requests.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=' + ingredient + '&limitLicense=false&number=5&ranking=1',
+			headers={
+		    "X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
+		    "Accept": "application/json"
+		  }
+		)
 		jsonList.append(json.loads(req.content))
 		userData = {}
+		jsonList = jsonList[0]
 		for data in jsonList:
-			userData['name'] = data['name']
-			userData['blog'] = data['blog']
-			userData['email'] = data['email']
-			userData['public_gists'] = data['public_gists']
-			userData['public_repos'] = data['public_repos']
-			userData['avatar_url'] = data['avatar_url']
+			userData['name_of_ingredient'] = data['title']
+			userData['image_url'] = data['image']
 		parsedData.append(userData)
+		# print (parsedData)
+		# print(jsonList[0])
 	return render(request, 'FoodAPI/profile.html', {'data':parsedData})
-# Create your views here.
