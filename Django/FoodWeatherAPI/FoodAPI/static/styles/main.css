@@ -1,0 +1,166 @@
+a {
+    color: #c0392b;
+}
+
+a:hover {
+    color: #c0392b;
+    text-decoration: underline;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    font-style: normal;
+    color: #666666;
+    background-color: #F4F4F4;
+    margin-bottom: 60px;
+    background:url(img/foodandbeer.jpg);
+    background-size: cover
+}
+
+.box-shadow--3dp {
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12)
+}
+
+#card-content {
+    float: left;
+}
+
+#card-content td {
+    padding: 0px 20px 0px 20px;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+
+#error-message-content {
+    margin-top: 100px;
+}
+
+#error-message-panel {
+    width: 60%;
+    padding: 20px 10px 20px 10px;
+}
+
+.fb-share-button {
+    transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    float: left;
+    margin-right: 22%;
+    margin-left: 8%;
+}
+
+.half {
+    position:relative;
+}
+
+.half:after {
+    content:'';
+    position:absolute;
+    z-index:1;
+    background:white;
+    width: 50%;
+    height: 100%;
+    left: 47%;
+}
+
+h2 {
+    font-weight: 300;
+}
+
+#homepage-panel {
+    margin-top: 150px;
+    padding: 20px 10px 40px 100px;
+    background-color: transparent;
+    border: none;
+}
+
+.jumbo {
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-bottom: 20px;
+}
+
+#jumbo-content {
+    float: left;
+}
+
+#jumbo-content td {
+    padding: 20px;
+}
+
+#logo {
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+    background-color: #FFFFFF;
+    padding: 4px;
+    height: 150px;
+}
+
+.navbar {
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+    background-color: #c0392b;
+    height: 70px;
+    border: none;
+}
+
+.navbar-brand {
+    color:white !important;
+    font-weight: 600 !important;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+#merch-logo {
+    height: 110px;
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fefdfb;
+    opacity: 0.6;
+}
+
+#return-to-search-btn {
+    font-family: "Open Sans", sans-serif;
+    border-color: #c0392b;
+    border-width: 2px;
+    color: #FFFFFF;
+    background-color: #c0392b;
+}
+
+#return-to-search-btn:hover {
+    border-color: #e74c3c;
+    background-color: #e74c3c;
+}
+
+#search-btn {
+    font-family: "Open Sans", sans-serif;
+    border-color: #c0392b;
+    border-width: 2px;
+    color: #FFFFFF;
+    background-color: #c0392b;
+    height: 50px;
+    width: 100px;
+}
+
+#search-btn:hover {
+    border-color: #e74c3c;
+    background-color: #e74c3c;
+}
+
+#search-input {
+    height: 50px;
+}

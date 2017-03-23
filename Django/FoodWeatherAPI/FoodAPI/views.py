@@ -3,10 +3,11 @@ import requests
 import json
 
 def index(request):
-	return HttpResponse('Hello World!')
+	# return HttpResponse('Hello World!')
+	return render(request, 'FoodAPI/index.html')
 
 def secondView(request):
-	return HttpResponse('My second view!')
+	return HttpResponse('Testing. MIC Check 1 2.')
 	
 def recipes(request):
 	parsedData =[]
