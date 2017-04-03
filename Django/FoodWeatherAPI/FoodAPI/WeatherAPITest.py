@@ -9,7 +9,7 @@ class FoodLists:
     cold = ["soup"]
     warm = ["salad"]
 
-def weather(zip):
+def recipes(zip):
     weatherList = []
     userData = {}
     jsonList = []
@@ -24,9 +24,6 @@ def weather(zip):
         weatherList.append(userData)
         userData = {}
     weatherList = weatherList[1:]
-    food(weatherList)
-
-def food(weatherList):
     i = 1
     parsedData2 = []
     while i <(len(weatherList) + 1):
@@ -67,4 +64,4 @@ def food(weatherList):
     print(parsedData2)
     return parsedData2
 
-weather("02467")
+recipes("02467")
