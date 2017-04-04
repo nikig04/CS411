@@ -2,9 +2,9 @@ from django.shortcuts import render, HttpResponse
 import requests
 import json
 class Vividict(dict):
-    def __missing__(self, key):
-        value = self[key] = type(self)()
-        return value
+	def __missing__(self, key):
+		value = self[key] = type(self)()
+		return value
 def index(request):
 	# return HttpResponse('Hello World!')
 	return render(request, 'FoodAPI/index.html')
@@ -15,8 +15,8 @@ def secondView(request):
 
 
 class FoodLists:
-    cold = ["soup"]
-    warm = ["salad"]
+	cold = ["soup"]
+	warm = ["salad"]
 
 def recipes(request):
 	weatherList = []
@@ -34,7 +34,9 @@ def recipes(request):
 			userData['min'] = data['temp']['min']
 			weatherList.append(userData)
 			userData = {}
-			weatherList = weatherList[1:]
+
+		weatherList = weatherList[1:]
+
 	i = 1
 	parsedData2 = []
 	while i <(len(weatherList) + 1):
@@ -47,22 +49,25 @@ def recipes(request):
 			jsonList2 = []
 			userData2 = Vividict()
 			req = requests.get(
-				'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?query=' + j + '&number=3',
-        		headers={
-            			"X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
-            			"Accept": "application/json"
-            	}
-       			)
-		jsonList2.append(json.loads(req.content.decode("utf-8")))
-		for data in jsonList2:
-			k = 0
-			while k < len((data)['results']):
-				userData2["Day_" +str(i) + " recipes"]["Recipe_" + str(k)] = (data['results'][k]['title'])
-				k = k + 1
+				'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?query=' +j + '&number=3',
+				headers={
+					"X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
+					"Accept": "application/json"
+				}
+			)
+			jsonList2.append(json.loads(req.content.decode("utf-8")))
+			for data in jsonList2:
+				k = 0
+				while k < len((data)['results']):
+					userData2["Day_" +str(i) + " recipes"]["Recipe_" + str(k)] = (data['results'][k]['title'])
+					k = k + 1
+
+
 			parsedData2.append(userData2)
 			userData2 = Vividict()
-        	
+
 		i = i + 1
+
 	return render(request, 'FoodAPI/recipes.html', {'data':parsedData2})
 
 # def recipes(request):
