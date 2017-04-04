@@ -1,18 +1,47 @@
 from django.shortcuts import render, HttpResponse
+from FoodAPI.forms import UserForm
+from FoodAPI.models import User
+
+
 import requests
 import json
+
+
 class Vividict(dict):
 	def __missing__(self, key):
 		value = self[key] = type(self)()
 		return value
+
 def index(request):
 	# return HttpResponse('Hello World!')
 	return render(request, 'FoodAPI/index.html')
 
-def secondView(request):
-	return HttpResponse('Testing. MIC Check 1 2.')
+#the function executes with the signup url to take the inputs 
+def signup(request):
+    if request.method == 'POST':  # if the form has been filled
 
+        form = UserForm(request.POST)
 
+        if form.is_valid():  # All the data is valid
+            username = request.POST.get('username', '')
+            email = request.POST.get('email', '')
+        password = request.POST.get('password', '')
+        # creating an user object containing all the data
+        user_obj = User(username=username, email=email, password=password)
+        # saving all the data in the current object into the database
+        user_obj.save()
+
+        return render(request, 'FoodAPI/signup.html', {'user_obj': user_obj,'is_registered':True }) # Redirect after POST
+
+    else:
+        form = UserForm()  # an unboundform
+
+        return render(request, 'FoodAPI/signup.html', {'form': form})
+
+#the function executes with the showdata url to display the list of registered FoodAPI
+def showdata(request):
+    all_users = User.objects.all()
+    return render(request, 'FoodAPI/showdata.html', {'all_users': all_users, })
 
 class FoodLists:
 	cold = ["soup"]

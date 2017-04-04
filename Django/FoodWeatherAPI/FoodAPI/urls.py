@@ -1,8 +1,11 @@
 from django.conf.urls import url
 from . import views
 
+app_name = 'FoodAPI'
+
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
-	url(r'^test/$', views.secondView, name='secondview'),
 	url(r'^recipes/$', views.recipes, name='recipes'),
+	url(r'^signup/$', views.signup, name='signup'),
+	url(r'^showdata/$', views.showdata, name='showdata'),
 	]

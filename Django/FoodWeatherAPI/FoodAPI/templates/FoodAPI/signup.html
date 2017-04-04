@@ -1,0 +1,10 @@
+<!-- The alert box to be shown when the submit button is clicked-->
+{% if is_registered %}
+    <script>alert("You are successfully registered with Username:{{user_obj.username }} and Email: {{ user_obj.email }}")</script>
+    {% else %}
+    <form action="{% url 'FoodAPI:signup' %}" method="post">
+    {% csrf_token %}
+   {{ form }}
+    <input type="submit" value="Submit">
+    </form>
+{% endif %}

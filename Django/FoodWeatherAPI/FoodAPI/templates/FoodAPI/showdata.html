@@ -1,0 +1,13 @@
+{% if all_users %}
+
+    <h1>Here is the list of users.</h1>
+<ul>
+    {% for user in all_users %}
+
+    <li> Name:{{ user.username }} Email:{{ user.email  }} Password:{{ user.password }}</li>
+    {% endfor %}
+</ul>
+{#  In case  no user exists.  #}
+{% else %}
+<h3> No users found.</h3>
+{% endif %}
