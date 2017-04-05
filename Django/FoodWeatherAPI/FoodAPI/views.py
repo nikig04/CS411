@@ -3,15 +3,19 @@ from FoodAPI.forms import UserForm
 from FoodAPI.models import User
 from FoodAPI.models import Weather
 
-
 import requests
 import json
-
+import sqlite3
 
 class Vividict(dict):
 	def __missing__(self, key):
 		value = self[key] = type(self)()
 		return value
+
+class FoodLists:
+	cold = ["soup"]
+	warm = ["salad"]
+
 
 def index(request):
 	# return HttpResponse('Hello World!')
@@ -39,14 +43,29 @@ def signup(request):
 
        return render(request, 'FoodAPI/signup.html', {'form': form})
 
-#the function executes with the showdata url to display the list of registered FoodAPI
+#the function executes with the showdata url to display the list of registered users
 def showdata(request):
    all_users = User.objects.all()
    return render(request, 'FoodAPI/showdata.html', {'all_users': all_users, })
 
-class FoodLists:
-	cold = ["soup"]
-	warm = ["salad"]
+# def checkData(data):
+# 	db = sqlite3.connect('db.sqlite3')
+# 	cursor = db.cursor()
+# 	command = '''SELECT 1 FROM FoodAPI_weather WHERE zipcode = ?;'''
+# 	cursor.execute(command, [data])
+
+# 	count = 0
+# 	for row in cursor:
+
+# 		count += 1
+
+# 	db.commit()
+# 	db.close()
+	
+# 	if count==0:
+# 		return 0
+# 	else:
+# 		return 1
 
 def recipes(request):
 	weatherList = []
@@ -54,27 +73,34 @@ def recipes(request):
 	jsonList = []
 	if request.POST:
 		zipcode = request.POST.get('da_input')
-		req = requests.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipcode +",us&units=imperial&cnt=10&appid=e994992be112bc68c26ac350718dd773")
-		jsonList.append(json.loads(req.content.decode("utf-8")))
-		jsonList = jsonList[0]["list"]
-		for data in jsonList:
-			userData['date'] = data['dt']
-			userData['forecast'] = data['weather'][0]['description']
-			userData['max'] = data['temp']['max']
-			userData['min'] = data['temp']['min']
-			userData['average'] = (userData['max'] + userData['min'])/2
-			weatherList.append(userData)
-			
-			# creating a weather object containing all the data
-			weather_obj = Weather(zipcode=zipcode, date=userData['date'], 
-				forecast=userData['forecast'], max_temp=userData['max'], 
-				min_temp=userData['min'], average_temp=userData['average'])
-			# saving all the data in the current object into the database
-			weather_obj.save()
-			# reset userData for next set
-			userData = {}
-		weatherList = weatherList[1:]
+		w = Weather.objects.all().filter(zipcode=zipcode)
+		# w = Weather.objects.prefetch_related(zipcode).all()\
+		#                  .order_by('date')
 
+		if w.exists():
+			print (w)
+		else:
+			req = requests.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipcode +",us&units=imperial&cnt=10&appid=e994992be112bc68c26ac350718dd773")
+			jsonList.append(json.loads(req.content.decode("utf-8")))
+			jsonList = jsonList[0]["list"]
+			for data in jsonList:
+				userData['date'] = data['dt']
+				userData['forecast'] = data['weather'][0]['description']
+				userData['max'] = data['temp']['max']
+				userData['min'] = data['temp']['min']
+				userData['average'] = (userData['max'] + userData['min'])/2
+				weatherList.append(userData)
+				
+				# creating a weather object containing all the data
+				weather_obj = Weather(zipcode=zipcode, date=userData['date'], 
+					forecast=userData['forecast'], max_temp=userData['max'], 
+					min_temp=userData['min'], average_temp=userData['average'])
+				# saving all the data in the current object into the database
+				weather_obj.save()
+				# reset userData for next set
+				userData = {}
+			weatherList = weatherList[1:]
+	
 	i = 1
 	parsedData2 = []
 	while i <(len(weatherList) + 1):
@@ -105,10 +131,12 @@ def recipes(request):
 
 		i = i + 1
 
+	# return render(request, 'FoodAPI/recipes.html', {'data':weatherList})
+
 	return render(request, 'FoodAPI/recipes.html', {'data':parsedData2})
 
 
-
+# PREVIOUS
 # def recipes(request):
 # 	weatherList = []
 # 	userData = {}

@@ -25,45 +25,45 @@ def recipes(zip):
         weatherList.append(userData)
         userData = {}
     weatherList = weatherList[1:]
-    print (weatherList)
+    # print (weatherList)
 
-    # i = 1
-    # parsedData2 = []
-    # while i <(len(weatherList) + 1):
+    i = 1
+    parsedData2 = []
+    while i <(len(weatherList) + 1):
 
-    #     max = weatherList[i-1]['max']
-    #     if max > 44:
-    #         foodList = FoodLists.warm
-    #     elif max <= 44:
-    #         foodList = FoodLists.cold
-
-
-    #     for j in foodList:
-    #         jsonList2 = []
-    #         userData2 = Vividict()
-    #         req = requests.get(
-    #             'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?query=' +j + '&number=3',
-    #             headers={
-    #                 "X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
-    #                 "Accept": "application/json"
-    #             }
-    #             )
-    #         jsonList2.append(json.loads(req.content.decode("utf-8")))
-    #         for data in jsonList2:
-    #             k = 0
-    #             while k < len((data)['results']):
-
-    #                 userData2["Day_" + str(i) + " recipes"]["Recipe_" + str(k)] = (data['results'][k]['title'])
-    #                 k = k + 1
+        max = weatherList[i-1]['max']
+        if max > 44:
+            foodList = FoodLists.warm
+        elif max <= 44:
+            foodList = FoodLists.cold
 
 
-    #         parsedData2.append(userData2)
-    #         userData2 = Vividict()
-    #     i = i + 1
+        for j in foodList:
+            jsonList2 = []
+            userData2 = Vividict()
+            req = requests.get(
+                'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?query=' +j + '&number=3',
+                headers={
+                    "X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
+                    "Accept": "application/json"
+                }
+                )
+            jsonList2.append(json.loads(req.content.decode("utf-8")))
+            for data in jsonList2:
+                k = 0
+                while k < len((data)['results']):
+
+                    userData2["Day_" + str(i) + " recipes"]["Recipe_" + str(k)] = (data['results'][k]['title'])
+                    k = k + 1
 
 
-    # print(parsedData2)
-    # return parsedData2
+            parsedData2.append(userData2)
+            userData2 = Vividict()
+        i = i + 1
+
+
+    print(parsedData2)
+    return parsedData2
     # print(jsonList2)
     # return jsonList2
 

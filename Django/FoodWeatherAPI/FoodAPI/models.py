@@ -25,9 +25,9 @@ class Weather(models.Model):
 	min_temp = models.FloatField()
 	average_temp = models.FloatField()
 
-	# returns zipcode when object of weather is printed
+	# returns data and average temperature when object of weather is printed
 	def __str__(self):
-		return self.zipcode
+		return self.date, self.average_temp
 
 class Recipe(models.Model):
 	# foreign key connecting to weather table
