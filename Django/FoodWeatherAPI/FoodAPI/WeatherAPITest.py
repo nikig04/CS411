@@ -21,47 +21,50 @@ def recipes(zip):
         userData['forecast'] = data['weather'][0]['description']
         userData['max'] = data['temp']['max']
         userData['min'] = data['temp']['min']
+        userData['average'] = (userData['max'] + userData['min'])/2
         weatherList.append(userData)
         userData = {}
     weatherList = weatherList[1:]
-    i = 1
-    parsedData2 = []
-    while i <(len(weatherList) + 1):
+    print (weatherList)
 
-        max = weatherList[i-1]['max']
-        if max > 44:
-            foodList = FoodLists.warm
-        elif max <= 44:
-            foodList = FoodLists.cold
+    # i = 1
+    # parsedData2 = []
+    # while i <(len(weatherList) + 1):
 
-
-
-        for j in foodList:
-            jsonList2 = []
-            userData2 = Vividict()
-            req = requests.get(
-                'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?query=' +j + '&number=3',
-                headers={
-                    "X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
-                    "Accept": "application/json"
-                }
-                )
-            jsonList2.append(json.loads(req.content.decode("utf-8")))
-            for data in jsonList2:
-                k = 0
-                while k < len((data)['results']):
-
-                    userData2["Day_" +str(i) + " recipes"]["Recipe_" + str(k)] = (data['results'][k]['title'])
-                    k = k + 1
+    #     max = weatherList[i-1]['max']
+    #     if max > 44:
+    #         foodList = FoodLists.warm
+    #     elif max <= 44:
+    #         foodList = FoodLists.cold
 
 
-            parsedData2.append(userData2)
-            userData2 = Vividict()
-        i = i + 1
+    #     for j in foodList:
+    #         jsonList2 = []
+    #         userData2 = Vividict()
+    #         req = requests.get(
+    #             'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?query=' +j + '&number=3',
+    #             headers={
+    #                 "X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
+    #                 "Accept": "application/json"
+    #             }
+    #             )
+    #         jsonList2.append(json.loads(req.content.decode("utf-8")))
+    #         for data in jsonList2:
+    #             k = 0
+    #             while k < len((data)['results']):
+
+    #                 userData2["Day_" + str(i) + " recipes"]["Recipe_" + str(k)] = (data['results'][k]['title'])
+    #                 k = k + 1
 
 
+    #         parsedData2.append(userData2)
+    #         userData2 = Vividict()
+    #     i = i + 1
 
-    print(parsedData2)
-    return parsedData2
+
+    # print(parsedData2)
+    # return parsedData2
+    # print(jsonList2)
+    # return jsonList2
 
 recipes("02467")
