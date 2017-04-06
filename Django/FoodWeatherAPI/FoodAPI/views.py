@@ -17,6 +17,7 @@ class FoodLists:
 	cold = ["soup"]
 	warm = ["salad"]
 
+# DON't NEED TO TOUCH THIS
 # class CreateContactView(CreateView):
 #     model = Contact
 #     template_name = 'edit_contact.html'
@@ -29,9 +30,9 @@ class FoodLists:
 #     form_class = forms.ContactForm
     
 def index(request):
-	# return HttpResponse('Hello World!')
 	return render(request, 'FoodAPI/index.html')
 
+# DON't NEED TO TOUCH THIS
 #the function executes with the signup url to take the inputs 
 def signup(request):
    if request.method == 'POST':  # if the form has been filled
@@ -54,18 +55,13 @@ def signup(request):
 
        return render(request, 'FoodAPI/signup.html', {'form': form})
 
+# DON't NEED TO TOUCH THIS
 #the function executes with the showdata url to display the list of registered users
 def showdata(request):
    all_users = User.objects.all()
    return render(request, 'FoodAPI/showdata.html', {'all_users': all_users, })
 
-# CODE TO DISPLAY IN HTML
-# {% for record in result %}
-#     {{record.c}}, {{record.e}}, 
-#     {% for animal in record.animal_set|slice:":1" %}
-#         {{animal.p}}
-#     {% endfor %}
-# {% endfor %}
+
 
 def recipes(request):
 	weatherList = []
@@ -82,7 +78,9 @@ def recipes(request):
 			req = requests.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipcode +",us&units=imperial&cnt=10&appid=e994992be112bc68c26ac350718dd773")
 			jsonList.append(json.loads(req.content.decode("utf-8")))
 			jsonList = jsonList[0]["list"]
+			# jsonList holds a list of dictionaries, each dictionary holding some weather info like date, description, temp max, temp min, etc
 			for data in jsonList:
+				# we're getting nine days worth of results so for each of the days, we're only storing the following pieces of info into userData and then into weatherList
 				userData['date'] = data['dt']
 				userData['forecast'] = data['weather'][0]['description']
 				userData['max'] = data['temp']['max']
@@ -102,6 +100,7 @@ def recipes(request):
 	
 	i = 1
 	parsedData2 = []
+	# once weatherList is filled, we iterate through it to get the average temp which is used to calculate types of food we want (cold, warm)
 	while i < (len(weatherList) + 1):
 		average = weatherList[i-1]['average_temp']
 		# print(average)
@@ -109,30 +108,37 @@ def recipes(request):
 			foodList = FoodLists.warm
 		elif average <= 44:
 			foodList = FoodLists.cold
+		# for now foodList is only one thing but later it could be more.
+		# from that foodList, we're accessing the food api to get ingredients (for now it's soup or salad)
 		for j in foodList:
 			jsonList2 = []
 			userData2 = Vividict()
 			req = requests.get(
-				'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?query=' +j + '&number=3',
+				'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?query=' + j + '&number=3',
 				headers={
 					"X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
 					"Accept": "application/json"
 				}
 			)
+			# unload the data from api call and append to jsonList
 			jsonList2.append(json.loads(req.content.decode("utf-8")))
+			# for each of the recipes (3 for each day) we're adding it to userData2
 			for data in jsonList2:
 				k = 0
 				while k < len((data)['results']):
 					userData2["Day_" +str(i) + " recipes"]["Recipe_" + str(k)] = (data['results'][k]['title'])
 					k = k + 1
-
+			# we're apeending stuff from userData2 into one list called parsedData2
 			parsedData2.append(userData2)
+			# print(parsedData2)
 			userData2 = Vividict()
 
 		i = i + 1
 
+	# renders the weatherList data but probably not useful for you guys since you want recipes
 	# return render(request, 'FoodAPI/recipes.html', {'data':weatherList})
 
+	# returns recipes to html
 	return render(request, 'FoodAPI/recipes.html', {'data':parsedData2})
 
 
@@ -141,11 +147,8 @@ def recipes(request):
 
 
 
-
-
-
-
-# PREVIOUS
+# DON'T NEED TO TOUCH THIS
+# BACKUP
 # def recipes(request):
 # 	weatherList = []
 # 	userData = {}
