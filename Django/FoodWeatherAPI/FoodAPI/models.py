@@ -19,15 +19,15 @@ class User(models.Model):
 class Weather(models.Model):
 
 	zipcode = models.CharField(max_length=20)
-	date = models.CharField(max_length=20)
+	date = models.CharField(max_length=10)
 	forecast = models.CharField(max_length=100)
-	max_temp = models.FloatField()
-	min_temp = models.FloatField()
-	average_temp = models.FloatField()
+	max_temp = models.CharField(max_length=5)
+	min_temp = models.CharField(max_length=5)
+	average_temp = models.CharField(max_length=5)
 
 	# returns data and average temperature when object of weather is printed
 	def __str__(self):
-		return self.date, self.average_temp
+		return '%s' % (self.average_temp)
 
 class Recipe(models.Model):
 	# foreign key connecting to weather table
