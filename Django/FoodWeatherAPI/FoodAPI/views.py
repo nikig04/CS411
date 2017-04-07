@@ -6,7 +6,7 @@ from FoodAPI.models import Weather
 import requests
 import json
 import sqlite3
-import forms
+# import forms
 
 class Vividict(dict):
 	def __missing__(self, key):
@@ -33,7 +33,7 @@ def index(request):
 	return render(request, 'FoodAPI/index.html')
 
 # DON't NEED TO TOUCH THIS
-#the function executes with the signup url to take the inputs 
+# the function executes with the signup url to take the inputs 
 def signup(request):
    if request.method == 'POST':  # if the form has been filled
 
@@ -140,8 +140,6 @@ def recipes(request):
 
 	# returns recipes to html
 	return render(request, 'FoodAPI/recipes.html', {'data':parsedData2})
-
-
 
 
 

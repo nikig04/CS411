@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from contacts.models import Contact
+# from contacts.models import Contact
  
 class UserForm(forms.Form):
     # to take the input of username
