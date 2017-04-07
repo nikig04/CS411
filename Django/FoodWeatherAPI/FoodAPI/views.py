@@ -32,7 +32,6 @@ class FoodLists:
 def index(request):
 	return render(request, 'FoodAPI/index.html')
 
-# DON't NEED TO TOUCH THIS
 # the function executes with the signup url to take the inputs 
 def signup(request):
    if request.method == 'POST':  # if the form has been filled
@@ -55,12 +54,10 @@ def signup(request):
 
        return render(request, 'FoodAPI/signup.html', {'form': form})
 
-# DON't NEED TO TOUCH THIS
 #the function executes with the showdata url to display the list of registered users
 def showdata(request):
    all_users = User.objects.all()
    return render(request, 'FoodAPI/showdata.html', {'all_users': all_users, })
-
 
 
 def recipes(request):
@@ -69,11 +66,12 @@ def recipes(request):
 	jsonList = []
 	if request.POST:
 		zipcode = request.POST.get('da_input')
-		w = Weather.objects.all().filter(zipcode=zipcode).values('average_temp')
+		w_zipcode = Weather.objects.all().filter(zipcode=zipcode)
 
-		if w.exists():
-			weatherList = w
-			# print (weatherList)
+		if w_zipcode.exists():
+			# weatherList = list(w_zipcode.values())
+			weatherList = Weather.objects.all().filter(zipcode=zipcode).values('average_temp')
+			print ('exists:', weatherList)
 		else:
 			req = requests.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipcode +",us&units=imperial&cnt=10&appid=e994992be112bc68c26ac350718dd773")
 			jsonList.append(json.loads(req.content.decode("utf-8")))
@@ -86,7 +84,6 @@ def recipes(request):
 				userData['max'] = data['temp']['max']
 				userData['min'] = data['temp']['min']
 				userData['average'] = round((userData['max'] + userData['min'])//2)
-				weatherList.append(userData)
 				
 				# creating a weather object containing all the data
 				weather_obj = Weather(zipcode=zipcode, date=userData['date'], 
@@ -94,16 +91,19 @@ def recipes(request):
 					min_temp=userData['min'], average_temp=userData['average'])
 				# saving all the data in the current object into the database
 				weather_obj.save()
+
 				# reset userData for next set
 				userData = {}
-			weatherList = weatherList[1:]
-	
+
+			weatherList = Weather.objects.all().filter(zipcode=zipcode).values('average_temp')
+			print ('new:', weatherList)
+				
+			
 	i = 1
 	parsedData2 = []
-	# once weatherList is filled, we iterate through it to get the average temp which is used to calculate types of food we want (cold, warm)
+	# once weatherList is filled, we iterate through it to get the average temp which is used to calculate types of food we want
 	while i < (len(weatherList) + 1):
 		average = weatherList[i-1]['average_temp']
-		# print(average)
 		if average > 44:
 			foodList = FoodLists.warm
 		elif average <= 44:
@@ -122,6 +122,7 @@ def recipes(request):
 			)
 			# unload the data from api call and append to jsonList
 			jsonList2.append(json.loads(req.content.decode("utf-8")))
+
 			# for each of the recipes (3 for each day) we're adding it to userData2
 			for data in jsonList2:
 				k = 0
@@ -135,8 +136,7 @@ def recipes(request):
 
 		i = i + 1
 
-	# renders the weatherList data but probably not useful for you guys since you want recipes
-	# return render(request, 'FoodAPI/recipes.html', {'data':weatherList})
+	# print(parsedData2)
 
 	# returns recipes to html
 	return render(request, 'FoodAPI/recipes.html', {'data':parsedData2})
@@ -144,8 +144,6 @@ def recipes(request):
 
 
 
-
-# DON'T NEED TO TOUCH THIS
 # BACKUP
 # def recipes(request):
 # 	weatherList = []

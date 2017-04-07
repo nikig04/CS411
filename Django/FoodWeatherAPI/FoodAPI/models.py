@@ -27,6 +27,7 @@ class Weather(models.Model):
 
 	# returns data and average temperature when object of weather is printed
 	def __str__(self):
+		# return '%s %s %s %s %s' % (self.date, self.forecast, self.max_temp, self.min_temp, self.average_temp)
 		return '%s' % (self.average_temp)
 
 class Recipe(models.Model):
