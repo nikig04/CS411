@@ -42,7 +42,7 @@ def signup(request):
        if form.is_valid():  # All the data is valid
            username = request.POST.get('username', '')
            email = request.POST.get('email', '')
-       password = request.POST.get('password', '')
+           password = request.POST.get('password', '')
        # creating an user object containing all the data
        user_obj = User(username=username, email=email, password=password)
        # saving all the data in the current object into the database
@@ -73,7 +73,7 @@ def recipes(request):
 
 		if w.exists():
 			weatherList = w
-			# print (weatherList)
+			print (weatherList)
 		else:
 			req = requests.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipcode +",us&units=imperial&cnt=10&appid=e994992be112bc68c26ac350718dd773")
 			jsonList.append(json.loads(req.content.decode("utf-8")))
@@ -85,18 +85,19 @@ def recipes(request):
 				userData['forecast'] = data['weather'][0]['description']
 				userData['max'] = data['temp']['max']
 				userData['min'] = data['temp']['min']
-				userData['average'] = round((userData['max'] + userData['min'])//2)
+				userData['average_temp'] = round((userData['max'] + userData['min'])//2)
 				weatherList.append(userData)
 				
 				# creating a weather object containing all the data
 				weather_obj = Weather(zipcode=zipcode, date=userData['date'], 
 					forecast=userData['forecast'], max_temp=userData['max'], 
-					min_temp=userData['min'], average_temp=userData['average'])
+					min_temp=userData['min'], average_temp=userData['average_temp'])
 				# saving all the data in the current object into the database
 				weather_obj.save()
 				# reset userData for next set
 				userData = {}
 			weatherList = weatherList[1:]
+			print (weatherList)
 	
 	i = 1
 	parsedData2 = []
@@ -139,6 +140,7 @@ def recipes(request):
 	# return render(request, 'FoodAPI/recipes.html', {'data':weatherList})
 
 	# returns recipes to html
+	# print(parsedData2)
 	return render(request, 'FoodAPI/recipes.html', {'data':parsedData2})
 
 
