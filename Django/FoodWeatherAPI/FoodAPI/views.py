@@ -124,19 +124,24 @@ def recipes(request):
 			jsonList2.append(json.loads(req.content.decode("utf-8")))
 
 			# for each of the recipes (3 for each day) we're adding it to userData2
+
 			for data in jsonList2:
 				k = 0
+				day_recipes=["Day "+str(i), average]
+
 				while k < len((data)['results']):
-					userData2["Day_" +str(i) + " recipes"]["Recipe_" + str(k)] = (data['results'][k]['title'])
+					userData2["Day_" +str(i) + "_recipes"]["Recipe_" + str(k)] = (data['results'][k]['title'])
+					day_recipes.append((data['results'][k]['title']))
 					k = k + 1
 			# we're apeending stuff from userData2 into one list called parsedData2
-			parsedData2.append(userData2)
+			#parsedData2.append(userData2)
+			parsedData2.append(day_recipes)
 			# print(parsedData2)
 			userData2 = Vividict()
 
 		i = i + 1
 
-	# print(parsedData2)
+	print(parsedData2)
 
 	# returns recipes to html
 	return render(request, 'FoodAPI/recipes.html', {'data':parsedData2})

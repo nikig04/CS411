@@ -53,7 +53,7 @@ def recipes(zip):
                 k = 0
                 while k < len((data)['results']):
 
-                    userData2["Day_" + str(i) + " recipes"]["Recipe_" + str(k)] = (data['results'][k]['title'])
+                    userData2["Day_" + str(i) + "recipes"]["Recipe_" + str(k)] = (data['results'][k]['title'])
                     k = k + 1
 
 
