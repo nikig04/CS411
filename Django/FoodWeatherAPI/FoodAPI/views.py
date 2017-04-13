@@ -89,7 +89,7 @@ def recipes(request):
 				# creating a weather object containing all the data
 				weather_obj = Weather(zipcode=zipcode, date=userData['date'], 
 					forecast=userData['forecast'], max_temp=userData['max'], 
-					min_temp=userData['min'], average_temp=userData['average_temp'])
+					min_temp=userData['min'], average_temp=userData['average'])
 				# saving all the data in the current object into the database
 				weather_obj.save()
 
