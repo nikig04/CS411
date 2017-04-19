@@ -14,8 +14,8 @@ class Vividict(dict):
 		return value
 
 class FoodLists:
-	cold = ["soup"]
-	warm = ["salad"]
+	cold = ["soup", "salad"]
+	warm = ["salad", "soup"]
 
 # DON't NEED TO TOUCH THIS
 # class CreateContactView(CreateView):
@@ -69,9 +69,7 @@ def recipes(request):
 		w_zipcode = Weather.objects.all().filter(zipcode=zipcode)
 
 		if w_zipcode.exists():
-			# weatherList = list(w_zipcode.values())
 			weatherList = Weather.objects.all().filter(zipcode=zipcode).values('average_temp')
-		#	print ('exists:', weatherList)
 
 		else:
 			req = requests.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipcode +",us&units=imperial&cnt=10&appid=e994992be112bc68c26ac350718dd773")
@@ -97,31 +95,38 @@ def recipes(request):
 				userData = {}
 
 			weatherList = Weather.objects.all().filter(zipcode=zipcode).values('average_temp')
-	#		print ('new:', weatherList)
-				
+
 	i = 1
 	parsedData2 = []
 	# once weatherList is filled, we iterate through it to get the average temp which is used to calculate types of food we want
 
 	#This loop is for every day of the 10 days
 	while i < (len(weatherList) + 1):
+		#foodList selector
 		foodList = []
-		# print("WeatherList: ")
-		# print(weatherList[i-1])
 		average = weatherList[i-1]['average_temp']
 		if average > 44:
 			for ii in FoodLists.warm:
 				foodList.append(ii)
 		elif average <= 44:
-			for ii in FoodLists.warm:
+			for ii in FoodLists.cold:
 				foodList.append(ii)
+
+
+
+
+
 		# for now foodList is only one thing but later it could be more.
 		# from that foodList, we're accessing the food api to get ingredients (for now it's soup or salad)
+
+
+		recipenum = 1
 		for j in foodList:
+
 			jsonList2 = []
 			#userData2 = Vividict()
 			req = requests.get(
-				'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=3&tags=' + j,
+				'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=' + j,
 				headers={
 					"X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
 					"Accept": "application/json"
@@ -130,23 +135,51 @@ def recipes(request):
 			# unload the data from api call and append to jsonList
 			jsonList2.append(json.loads(req.content.decode("utf-8")))
 
-			# for each of the recipes (3 for each day) we're adding it to userData2
 
 			for each_day in jsonList2:
+				day_recipes = ["Day " + str(i) + " Recipe " + str(recipenum), average]
 				k = 0
-				day_recipes=["Day "+str(i), average]
 				#This loop says for each recipe in each day
 				while k < len((each_day)['recipes']):
-				#	userData2["Day_" +str(i) + "_recipes"]["Recipe_" + str(k)] = (each_day['recipes'][k]['title'])
+					#Add the recipe title
 					day_recipes.append((each_day['recipes'][k]['title']))
-					k = k + 1
-			# we're apeending stuff from userData2 into one list called parsedData2
-			#parsedData2.append(userData2)
-			parsedData2.append(day_recipes)
-			# print(parsedData2)
-			#userData2 = Vividict()
+					#Add the recipe URL
+					day_recipes.append((each_day['recipes'][k]['spoonacularSourceUrl']))
 
+					#Add the recipe ingredients
+					z = 0
+					ingredients = ""
+					#for the list of ingredients for each recipe for each day
+					while z < len(each_day['recipes'][k]['extendedIngredients']):
+						#If the amount is something like 0.33333333333, we cut it off after 6 characters
+						if len(str([each_day['recipes'][k]['extendedIngredients'][z]['amount']])) > 7:
+							temp = str([each_day['recipes'][k]['extendedIngredients'][z]['amount']])
+							temp = temp[0:7] + " "
+							print(temp)
+							ingredients += temp
+						#Otherwise, just add the amount
+						else:
+							ingredients += str([each_day['recipes'][k]['extendedIngredients'][z]['amount']])
+						ingredients += str([each_day['recipes'][k]['extendedIngredients'][z]['unitLong']])
+						ingredients += str([each_day['recipes'][k]['extendedIngredients'][z]['name']])
+						ingredients += 'ENDTAG'
+						z = z + 1
+					#Parse the ingredients string and make the output pretty.
+					ingredients = ingredients.replace('[','')
+					ingredients = ingredients.replace(']', ' ')
+					ingredients = ingredients.replace("u'", '')
+					ingredients = ingredients.replace("'", "")
+					ingredients = ingredients.replace(" ENDTAG", ", ")
+					day_recipes.append(ingredients)
+
+
+
+
+					k = k + 1
+				recipenum += 1
+			parsedData2.append(day_recipes)
 		i = i + 1
+
 
 	print(parsedData2)
 
