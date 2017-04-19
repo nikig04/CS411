@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse
 from FoodAPI.forms import UserForm
 from FoodAPI.models import User
 from FoodAPI.models import Weather
-
+import random
 import requests
 import json
 import sqlite3
@@ -14,8 +14,17 @@ class Vividict(dict):
 		return value
 
 class FoodLists:
-	cold = ["soup", "salad"]
-	warm = ["salad", "soup"]
+	rain = ["stew", "buttermilk biscuit", "mac and cheese", "lasagna", "chili", "lentil soup", "grilled cheese",
+			"chocolate chip cookie", "baked beans"]
+	snow = ["mac and cheese", "roast chicken", "soup", "pasta", "hot chocolate", "pot pie", "muffin", "casserole"]
+	cold = ["soup", "chili", "spaghetti", "pork chop", "stew", "mac and cheese", "lasagna", "chowder", "curry",
+			"hot chocolate"]
+	hot = ["salad", "shrimp", "chicken salad", "couscous", "sausage", "scallops", "hot dog", "burger", "corn"]
+	summer = ["ice cream", "salad", "watermelon", "yogurt", "fig", "strawberry", "cucumber", "summer squash",
+			  "gazpacho", "lemonade", "hot dog", "burger", "lobster", "summer"]
+	winter = ["soup", "chili", "stew", "mac and cheese", "lasagna", "pot pie", "meatball", "quiche", "winter"]
+	autumn = ["cobbler", "squash", "pumpkin", "crumble", "pear", "blackberry", "brussels sprouts", "leek", "autumn"]
+	spring = ["apricot", "avocado", "asparagus", "strawberry", "salmon", "pea", "spring", "chicken", "snap pea"]
 
 # DON't NEED TO TOUCH THIS
 # class CreateContactView(CreateView):
@@ -102,83 +111,88 @@ def recipes(request):
 
 	#This loop is for every day of the 10 days
 	while i < (len(weatherList) + 1):
-		#foodList selector
-		foodList = []
-		average = weatherList[i-1]['average_temp']
-		if average > 44:
-			for ii in FoodLists.warm:
-				foodList.append(ii)
-		elif average <= 44:
-			for ii in FoodLists.cold:
-				foodList.append(ii)
+		if i < 6:
+			#foodList selector
+			foodList = []
+			average = weatherList[i-1]['average_temp']
+			if average > 50:
+				for ii in FoodLists.hot:
+					foodList.append(ii)
+			elif average <= 50:
+				for ii in FoodLists.cold:
+					foodList.append(ii)
 
 
 
 
 
-		# for now foodList is only one thing but later it could be more.
-		# from that foodList, we're accessing the food api to get ingredients (for now it's soup or salad)
+			# for now foodList is only one thing but later it could be more.
+			# from that foodList, we're accessing the food api to get ingredients (for now it's soup or salad)
 
 
-		recipenum = 1
-		for j in foodList:
-
-			jsonList2 = []
-			#userData2 = Vividict()
-			req = requests.get(
-				'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=' + j,
-				headers={
-					"X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
-					"Accept": "application/json"
-				}
-			)
-			# unload the data from api call and append to jsonList
-			jsonList2.append(json.loads(req.content.decode("utf-8")))
-
-
-			for each_day in jsonList2:
-				day_recipes = ["Day " + str(i) + " Recipe " + str(recipenum), average]
-				k = 0
-				#This loop says for each recipe in each day
-				while k < len((each_day)['recipes']):
-					#Add the recipe title
-					day_recipes.append((each_day['recipes'][k]['title']))
-					#Add the recipe URL
-					day_recipes.append((each_day['recipes'][k]['spoonacularSourceUrl']))
-
-					#Add the recipe ingredients
-					z = 0
-					ingredients = ""
-					#for the list of ingredients for each recipe for each day
-					while z < len(each_day['recipes'][k]['extendedIngredients']):
-						#If the amount is something like 0.33333333333, we cut it off after 6 characters
-						if len(str([each_day['recipes'][k]['extendedIngredients'][z]['amount']])) > 7:
-							temp = str([each_day['recipes'][k]['extendedIngredients'][z]['amount']])
-							temp = temp[0:7] + " "
-							print(temp)
-							ingredients += temp
-						#Otherwise, just add the amount
-						else:
-							ingredients += str([each_day['recipes'][k]['extendedIngredients'][z]['amount']])
-						ingredients += str([each_day['recipes'][k]['extendedIngredients'][z]['unitLong']])
-						ingredients += str([each_day['recipes'][k]['extendedIngredients'][z]['name']])
-						ingredients += 'ENDTAG'
-						z = z + 1
-					#Parse the ingredients string and make the output pretty.
-					ingredients = ingredients.replace('[','')
-					ingredients = ingredients.replace(']', ' ')
-					ingredients = ingredients.replace("u'", '')
-					ingredients = ingredients.replace("'", "")
-					ingredients = ingredients.replace(" ENDTAG", ", ")
-					day_recipes.append(ingredients)
+			recipenum = 1
+			for y in range(3):
+				j = random.choice(foodList)
+				foodList.remove(j)
+				print(j)
+				jsonList2 = []
+				#userData2 = Vividict()
+				req = requests.get(
+					'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=' + j,
+					headers={
+						"X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
+						"Accept": "application/json"
+					}
+				)
+				# unload the data from api call and append to jsonList
+				jsonList2.append(json.loads(req.content.decode("utf-8")))
 
 
+				for each_day in jsonList2:
+					day_recipes = ["Day " + str(i) + " Recipe " + str(recipenum), average]
+					k = 0
+					#This loop says for each recipe in each day
+					while k < len((each_day)['recipes']):
+						#Add the recipe title
+						day_recipes.append((each_day['recipes'][k]['title']))
+						#Add the recipe URL
+						day_recipes.append((each_day['recipes'][k]['spoonacularSourceUrl']))
+
+						#Add the recipe ingredients
+						z = 0
+						ingredients = ""
+						#for the list of ingredients for each recipe for each day
+						while z < len(each_day['recipes'][k]['extendedIngredients']):
+							#If the amount is something like 0.33333333333, we cut it off after 6 characters
+							if len(str([each_day['recipes'][k]['extendedIngredients'][z]['amount']])) > 7:
+								temp = str([each_day['recipes'][k]['extendedIngredients'][z]['amount']])
+								temp = temp[0:7] + " "
+								ingredients += temp
+							#Otherwise, just add the amount
+							else:
+								ingredients += str([each_day['recipes'][k]['extendedIngredients'][z]['amount']])
+							ingredients += str([each_day['recipes'][k]['extendedIngredients'][z]['unitLong']])
+							ingredients += str([each_day['recipes'][k]['extendedIngredients'][z]['name']])
+							ingredients += 'ENDTAG'
+							z = z + 1
+						#Parse the ingredients string and make the output pretty.
+						ingredients = ingredients.replace('[','')
+						ingredients = ingredients.replace(']', ' ')
+						ingredients = ingredients.replace("u'", '')
+						ingredients = ingredients.replace("'", "")
+						ingredients = ingredients.replace(" ENDTAG", ", ")
+						day_recipes.append(ingredients)
 
 
-					k = k + 1
-				recipenum += 1
-			parsedData2.append(day_recipes)
-		i = i + 1
+
+
+						k = k + 1
+					recipenum += 1
+				parsedData2.append(day_recipes)
+			i = i + 1
+		else:
+			i = i + 1
+
 
 
 	print(parsedData2)
