@@ -71,7 +71,7 @@ def recipes(request):
 		if w_zipcode.exists():
 			# weatherList = list(w_zipcode.values())
 			weatherList = Weather.objects.all().filter(zipcode=zipcode).values('average_temp')
-			print ('exists:', weatherList)
+		#	print ('exists:', weatherList)
 
 		else:
 			req = requests.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipcode +",us&units=imperial&cnt=10&appid=e994992be112bc68c26ac350718dd773")
@@ -97,24 +97,31 @@ def recipes(request):
 				userData = {}
 
 			weatherList = Weather.objects.all().filter(zipcode=zipcode).values('average_temp')
-			print ('new:', weatherList)
+	#		print ('new:', weatherList)
 				
 	i = 1
 	parsedData2 = []
 	# once weatherList is filled, we iterate through it to get the average temp which is used to calculate types of food we want
+
+	#This loop is for every day of the 10 days
 	while i < (len(weatherList) + 1):
+		foodList = []
+		# print("WeatherList: ")
+		# print(weatherList[i-1])
 		average = weatherList[i-1]['average_temp']
 		if average > 44:
-			foodList = FoodLists.warm
+			for ii in FoodLists.warm:
+				foodList.append(ii)
 		elif average <= 44:
-			foodList = FoodLists.cold
+			for ii in FoodLists.warm:
+				foodList.append(ii)
 		# for now foodList is only one thing but later it could be more.
 		# from that foodList, we're accessing the food api to get ingredients (for now it's soup or salad)
 		for j in foodList:
 			jsonList2 = []
-			userData2 = Vividict()
+			#userData2 = Vividict()
 			req = requests.get(
-				'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?query=' + j + '&number=3',
+				'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=3&tags=' + j,
 				headers={
 					"X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
 					"Accept": "application/json"
@@ -125,19 +132,19 @@ def recipes(request):
 
 			# for each of the recipes (3 for each day) we're adding it to userData2
 
-			for data in jsonList2:
+			for each_day in jsonList2:
 				k = 0
 				day_recipes=["Day "+str(i), average]
-
-				while k < len((data)['results']):
-					userData2["Day_" +str(i) + "_recipes"]["Recipe_" + str(k)] = (data['results'][k]['title'])
-					day_recipes.append((data['results'][k]['title']))
+				#This loop says for each recipe in each day
+				while k < len((each_day)['recipes']):
+				#	userData2["Day_" +str(i) + "_recipes"]["Recipe_" + str(k)] = (each_day['recipes'][k]['title'])
+					day_recipes.append((each_day['recipes'][k]['title']))
 					k = k + 1
 			# we're apeending stuff from userData2 into one list called parsedData2
 			#parsedData2.append(userData2)
 			parsedData2.append(day_recipes)
 			# print(parsedData2)
-			userData2 = Vividict()
+			#userData2 = Vividict()
 
 		i = i + 1
 
