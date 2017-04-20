@@ -11,6 +11,8 @@ class User(models.Model):
 	email = models.CharField(max_length=100)
 	# to store password
 	password = models.CharField(max_length=100)
+	# to store confirm password
+	# confirm_password = models.CharField(max_length=100)
 
 	# returns name of user when object of user is printed
 	def __str__(self):
