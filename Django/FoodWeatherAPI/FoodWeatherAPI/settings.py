@@ -84,10 +84,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = '/'
-
 SOCIAL_AUTH_FACEBOOK_KEY = '259911221140799'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '5367650d91f0f41ff2ee9d0aa4cd9860'  # App Secret
 
@@ -142,3 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'

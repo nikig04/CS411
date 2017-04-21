@@ -171,13 +171,12 @@
     <div id="page"></div>
         <div id="logo">
             <h1><a href="/" id="logoLink"> Feather </a></h1>
-<!--             <h2> Hello {{ user_obj.username }}!</h2> -->
+            <h2>Welcome, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2>
+            <p>Your email address: {{ user.email }}</p>
         </div>
         
         <div id="nav">
             <ul>
-                <li><a href="login">Login</a></li>
-                <li><a href="logout">Logout</a></li>
                 <li><a href="../FoodAPI/recipes">Quick Search</a></li>
                 <li><a href="profile">My Profile</a></li>
             </ul>   

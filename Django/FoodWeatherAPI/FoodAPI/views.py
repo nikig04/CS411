@@ -1,10 +1,11 @@
-from django.shortcuts import render, HttpResponse
-from FoodAPI.forms import UserForm
-from FoodAPI.models import User
+from django.shortcuts import render, redirect, HttpResponse
+from django.contrib.auth import login, authenticate
+# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+
+from FoodAPI.forms import SignUpForm
+# from FoodAPI.models import User
 from FoodAPI.models import Weather
-
-from django.contrib.auth.decorators import login_required # <--
-
 
 import random
 import requests
@@ -13,7 +14,6 @@ import datetime
 from datetime import timedelta
 from datetime import date, datetime
 import sqlite3
-# import forms
 
 class Vividict(dict):
 	def __missing__(self, key):
@@ -35,39 +35,30 @@ class FoodLists:
 
 
 def index(request):
-	return render(request, 'FoodAPI/index.html')
+	return render(request, 'index.html')
 
-# @login_required
+@login_required
 def home(request):
-    return render(request, 'FoodAPI/home.html')
+    return render(request, 'home.html')
 
 # the function executes with the login url to take the inputs 
-def login(request):
+def signup(request):
     if request.method == 'POST':  # if the form has been filled
-
-        form = UserForm(request.POST)
-
+        form = SignUpForm(request.POST)
         if form.is_valid():  # All the data is valid
-           username = request.POST.get('username', '')
-           email = request.POST.get('email', '')
-           password = request.POST.get('password', '')
-
-        check_user = User.objects.all().filter(username=username)
-        if check_user.exists():
-        	user_obj = User.objects.all().filter(username=username)
-        else:
-        	# creating an user object containing all the data
-        	user_obj = User(username=username, email=email, password=password)
-        	# saving all the data in the current object into the database
-        	user_obj.save()
-
-        return render(request, 'FoodAPI/home.html', {'user_obj': user_obj,'is_registered':True }) # Redirect after POST
-
+        	form.save()
+        	username = form.cleaned_data.get('username')
+        	raw_password = form.cleaned_data.get('password1')
+        	user = authenticate(username=username, password=raw_password)
+        	login(request, user)
+        	return redirect('home')
+           	# username = request.POST.get('username', '')
+           	# email = request.POST.get('email', '')
+           	# password = request.POST.get('password', '')
     else:
-
-    	form = UserForm()  # an unboundform
-
-    	return render(request, 'registration/login.html', {'form': form})
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
+    # return render(request, 'FoodAPI/signup.html', {'user_obj': user_obj,'is_registered':True }) # Redirect after POST
 
 #the function executes with the showdata url to display the list of registered users
 def showdata(request):
@@ -118,8 +109,7 @@ def recipes(request):
 			forecastList = Weather.objects.all().filter(zipcode=zipcode).values('forecast')
 
 	i = 1
-	parsedData2 = []
-	# once weatherList is filled, we iterate through it to get the average temp which is used to calculate types of food we want
+	parsedData2 = []	# once weatherList is filled, we iterate through it to get the average temp which is used to calculate types of food we want
 
 	#This loop is for every day of the 10 days
 	while i < (len(weatherList)):
@@ -188,9 +178,6 @@ def recipes(request):
 				for au in FoodLists.autumn:
 					foodList.append(au)
 
-
-
-
 			recipenum = 1
 			for y in range(3):
 				j = random.choice(foodList)
@@ -243,9 +230,6 @@ def recipes(request):
 						ingredients = ingredients.replace("'", "")
 						ingredients = ingredients.replace(" ENDTAG", ", ")
 						day_recipes.append(ingredients)
-
-
-
 
 						k = k + 1
 					recipenum += 1
