@@ -1,0 +1,20 @@
+<!-- The alert box to be shown when the submit button is clicked-->
+
+
+{% if is_registered %}
+    <script>alert("You are successfully registered with Username: {{user_obj.username }} and Email: {{ user_obj.email }}")</script>
+    {% else %}
+    <h2>Login</h2>
+    
+    <form method="post">
+    {% csrf_token %}
+   {{ form.as_p }}
+    <input type="submit" value="Login">
+
+    </form>
+    <br>
+  	<p><strong>-- OR --</strong></p>
+    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+{% endif %}
+
+

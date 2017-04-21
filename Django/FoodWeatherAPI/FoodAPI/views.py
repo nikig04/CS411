@@ -2,7 +2,8 @@ from django.shortcuts import render, HttpResponse
 from FoodAPI.forms import UserForm
 from FoodAPI.models import User
 from FoodAPI.models import Weather
-from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth.decorators import login_required # <--
 
 
 import random
@@ -36,8 +37,12 @@ class FoodLists:
 def index(request):
 	return render(request, 'FoodAPI/index.html')
 
-# the function executes with the signup url to take the inputs 
-def signup(request):
+# @login_required
+def home(request):
+    return render(request, 'FoodAPI/home.html')
+
+# the function executes with the login url to take the inputs 
+def login(request):
    if request.method == 'POST':  # if the form has been filled
 
        form = UserForm(request.POST)
@@ -51,17 +56,17 @@ def signup(request):
        # saving all the data in the current object into the database
        user_obj.save()
 
-       return render(request, 'FoodAPI/signup.html', {'user_obj': user_obj,'is_registered':True }) # Redirect after POST
+       return render(request, 'FoodAPI/home.html', {'user_obj': user_obj,'is_registered':True }) # Redirect after POST
 
    else:
        form = UserForm()  # an unboundform
 
-       return render(request, 'FoodAPI/signup.html', {'form': form})
+       return render(request, 'registration/login.html', {'form': form})
 
 #the function executes with the showdata url to display the list of registered users
 def showdata(request):
    all_users = User.objects.all()
-   return render(request, 'FoodAPI/showdata.html', {'all_users': all_users, })
+   return render(request, 'registration/showdata.html', {'all_users': all_users, })
 
 
 def recipes(request):

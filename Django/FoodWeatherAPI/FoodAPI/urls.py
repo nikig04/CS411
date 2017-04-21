@@ -1,12 +1,10 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
+from django.contrib.auth import views as auth_views # <--
 from . import views
 
 app_name = 'FoodAPI'
 
 urlpatterns = [
-	url(r'^$', views.index, name='index'),
-	url(r'^signup/$', views.signup, name='signup'),
-	url(r'^showdata/$', views.showdata, name='showdata'),
-	url(r'^recipes/$', views.recipes, name='recipes')
+	url(r'^recipes/$', views.recipes, name='recipes'),
 
 	]

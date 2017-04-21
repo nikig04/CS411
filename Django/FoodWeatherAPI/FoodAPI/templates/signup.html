@@ -1,0 +1,30 @@
+<!-- The alert box to be shown when the submit button is clicked-->
+{% if is_registered %}
+    <script>alert("You are successfully registered with Username:{{user_obj.username }} and Email: {{ user_obj.email }}")</script>
+    {% else %}
+    <form action="{% url 'FoodAPI:signup' %}" method="post">
+    {% csrf_token %}
+   {{ form }}
+    <input type="submit" value="Login">
+
+    </form>
+    <br>
+  	<p><strong>-- OR --</strong></p>
+    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+{% endif %}
+
+
+<!-- {% block content %}
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+  <br>
+  <p><strong>-- OR --</strong></p>
+  <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+  <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br>
+  <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+{% endblock %} -->
+
