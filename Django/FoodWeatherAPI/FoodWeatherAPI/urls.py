@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^$', views.home, name='home'), # <--
     # url(r'^login/$', auth_views.login, name='login'), # <--
     url(r'^login/$', views.login, name='login'),
-    url(r'^logout/$', auth_views.logout, name='logout'), # <--
+    # url(r'^logout/$', views.logout, {'next_page': '/login'}), # <--
     url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
     url(r'^showdata/$', views.showdata, name='showdata'),
 

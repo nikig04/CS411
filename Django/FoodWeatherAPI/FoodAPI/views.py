@@ -43,25 +43,31 @@ def home(request):
 
 # the function executes with the login url to take the inputs 
 def login(request):
-   if request.method == 'POST':  # if the form has been filled
+    if request.method == 'POST':  # if the form has been filled
 
-       form = UserForm(request.POST)
+        form = UserForm(request.POST)
 
-       if form.is_valid():  # All the data is valid
+        if form.is_valid():  # All the data is valid
            username = request.POST.get('username', '')
            email = request.POST.get('email', '')
            password = request.POST.get('password', '')
-       # creating an user object containing all the data
-       user_obj = User(username=username, email=email, password=password)
-       # saving all the data in the current object into the database
-       user_obj.save()
 
-       return render(request, 'FoodAPI/home.html', {'user_obj': user_obj,'is_registered':True }) # Redirect after POST
+        check_user = User.objects.all().filter(username=username)
+        if check_user.exists():
+        	user_obj = User.objects.all().filter(username=username)
+        else:
+        	# creating an user object containing all the data
+        	user_obj = User(username=username, email=email, password=password)
+        	# saving all the data in the current object into the database
+        	user_obj.save()
 
-   else:
-       form = UserForm()  # an unboundform
+        return render(request, 'FoodAPI/home.html', {'user_obj': user_obj,'is_registered':True }) # Redirect after POST
 
-       return render(request, 'registration/login.html', {'form': form})
+    else:
+
+    	form = UserForm()  # an unboundform
+
+    	return render(request, 'registration/login.html', {'form': form})
 
 #the function executes with the showdata url to display the list of registered users
 def showdata(request):
