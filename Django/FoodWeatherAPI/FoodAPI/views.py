@@ -78,7 +78,11 @@ def recipes(request):
 
 		else:
 			req = requests.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipcode +",us&units=imperial&cnt=10&appid=e994992be112bc68c26ac350718dd773")
+
 			jsonList.append(json.loads(req.content.decode("utf-8")))
+			if 'city not found' in jsonList[0].values():
+				parsedData2 = [['','Please input a valid zipcode','','','','']]
+				return render(request, 'FoodAPI/recipes.html', {'data': parsedData2})
 			jsonList = jsonList[0]["list"]
 			# jsonList holds a list of dictionaries, each dictionary holding some weather info like date, description, temp max, temp min, etc
 			for data in jsonList:
