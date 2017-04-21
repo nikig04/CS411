@@ -8,6 +8,9 @@ from django.contrib.auth.decorators import login_required
 import random
 import requests
 import json
+import datetime
+from datetime import timedelta
+from datetime import date, datetime
 import sqlite3
 # import forms
 
@@ -71,6 +74,7 @@ def recipes(request):
 
 		if w_zipcode.exists():
 			weatherList = Weather.objects.all().filter(zipcode=zipcode).values('average_temp')
+			forecastList = Weather.objects.all().filter(zipcode=zipcode).values('forecast')
 
 		else:
 			req = requests.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipcode +",us&units=imperial&cnt=10&appid=e994992be112bc68c26ac350718dd773")
@@ -96,33 +100,84 @@ def recipes(request):
 				userData = {}
 
 			weatherList = Weather.objects.all().filter(zipcode=zipcode).values('average_temp')
+			forecastList = Weather.objects.all().filter(zipcode=zipcode).values('forecast')
 
 	i = 1
 	parsedData2 = []
 	# once weatherList is filled, we iterate through it to get the average temp which is used to calculate types of food we want
 
 	#This loop is for every day of the 10 days
-	while i < (len(weatherList) + 1):
+	while i < (len(weatherList)):
 		if i < 6:
+			# Get the date of i days ahead of today
+			current_date = date.today() + timedelta(days=(i))
+			priority1 = False
+			priority2 = False
 			#foodList selector
 			foodList = []
-			average = weatherList[i-1]['average_temp']
-			if average > 50:
-				for ii in FoodLists.hot:
-					foodList.append(ii)
-			elif average <= 50:
-				for ii in FoodLists.cold:
-					foodList.append(ii)
+			average = weatherList[i]['average_temp']
+			average = float(average)
+			forecast = forecastList[i]['forecast']
+			forecast = forecast.title()
+			forecast = forecast.encode('ascii', 'ignore')
+			# Determine the season
+			Y = 2000  # dummy leap year to allow input X-02-29 (leap day)
+			seasons = [('winter', (date(Y, 1, 1), date(Y, 3, 20))),
+					   ('spring', (date(Y, 3, 21), date(Y, 6, 20))),
+					   ('summer', (date(Y, 6, 21), date(Y, 9, 22))),
+					   ('autumn', (date(Y, 9, 23), date(Y, 12, 20))),
+					   ('winter', (date(Y, 12, 21), date(Y, 12, 31)))]
 
-			# for now foodList is only one thing but later it could be more.
-			# from that foodList, we're accessing the food api to get ingredients (for now it's soup or salad)
+			def get_season(now):
+				if isinstance(now, datetime):
+					now = now.date()
+				now = now.replace(year=Y)
+				return next(season for season, (start, end) in seasons
+							if start <= now <= end)
+
+			season = get_season(current_date)
+
+			# Analyze the forecast, season, and temperature and decide what recipes to search
+			if 'Drizzle' in forecast or 'Rain' in forecast:
+				priority1 = True
+				for ra in FoodLists.rain:
+					foodList.append(ra)
+			if 'Snow' in forecast:
+				priority1 = True
+				for sn in FoodLists.snow:
+					foodList.append(sn)
+			if average >= 73 and priority1 == False:
+				priority2 = True
+				for ho in FoodLists.hot:
+					foodList.append(ho)
+			if average <= 30 and priority1 == False:
+				priority2 = True
+				for co in FoodLists.cold:
+					foodList.append(co)
+
+			if season == 'winter' and priority2 == False and priority1 == False:
+				for wi in FoodLists.winter:
+					foodList.append(wi)
+
+			if season == 'summer' and priority2 == False and priority1 == False:
+				for su in FoodLists.summer:
+					foodList.append(su)
+
+			if season == 'spring' and priority2 == False and priority1 == False:
+				for sp in FoodLists.spring:
+					foodList.append(sp)
+
+			if season == 'autumn' and priority2 == False and priority1 == False:
+				for au in FoodLists.autumn:
+					foodList.append(au)
+
+
 
 
 			recipenum = 1
 			for y in range(3):
 				j = random.choice(foodList)
 				foodList.remove(j)
-				print(j)
 				jsonList2 = []
 				#userData2 = Vividict()
 				req = requests.get(
@@ -137,7 +192,8 @@ def recipes(request):
 
 
 				for each_day in jsonList2:
-					day_recipes = ["Day " + str(i) + " Recipe " + str(recipenum), average]
+					day_recipes = [current_date.strftime("%B %d, %Y") + " Recipe " + str(recipenum), average]
+					day_recipes.append(forecast)
 					k = 0
 					#This loop says for each recipe in each day
 					while k < len((each_day)['recipes']):
@@ -180,8 +236,6 @@ def recipes(request):
 			i = i + 1
 		else:
 			i = i + 1
-
-	print(parsedData2)
 
 	# returns recipes to html
 	# print(parsedData2)
