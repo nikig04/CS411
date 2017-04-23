@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views # <--
 
 from FoodAPI import views
+import django_cron
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,6 +31,6 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/login'}, name='logout'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
-    url(r'^showdata/$', views.showdata, name='showdata'),
+    # url(r'^showdata/$', views.showdata, name='showdata'),
 
 ]
