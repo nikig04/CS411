@@ -124,7 +124,7 @@
         box-shadow: 0 8px 6px -6px #999;
         background-color: #FFFFFF;
         padding: 4px;
-        height: 150px;
+        height: 100px;
     }
 
     .navbar {
@@ -220,6 +220,19 @@
    width: 100%;
 }
 
+.header img {
+  float: left;
+  width: 250px;
+  height: 100px;
+  background: #555;
+}
+
+.header h2 {
+  position: relative;
+  top: 18px;
+  left: 10px;
+}
+
 
   </style>
 
@@ -228,7 +241,10 @@
     <header></header>
     <nav class="navbar navbar-default">
         <div>
-            <h4 style="padding-left:3%; color:white;"> Feather</h4>
+            <div class="header">
+                <a href="/"><img src="/static/styles/img/logo.jpg" alt="logo" /></a>
+            </div>
+            <!-- <h3 style="padding-left:3%; color:white;"> Feather</h3> -->
         </div>
     <br><br><br>
     <div id="loading" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">
@@ -236,7 +252,7 @@
     <form class="form-signin" id="login_form" method="post" action="/FoodAPI/recipes/">
     	{% csrf_token %}
       <div class="panel panel-default col-md-7 col-centered" id="homepage-panel">
-        <h4 style="color:white;"><strong>Please enter a Zip Code.</strong></h4>
+        <h4 style="color:black;"><strong>Please enter a Zip Code.</strong></h4>
         <br>
         <div class="col-sm-10 input-group" id="content">
           <input type="text" name="da_input" class="form-control box-shadow--3dp" placeholder="e.g. 02215" id="search-input">
@@ -288,14 +304,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-   <!-- <p>{{ key}}</p> -->
-       <!--    <tr>
-            <td>{{ key.name_of_ingredient }}</td>
-            <td>{{ key.image_url }}</td> -->
-
-
-

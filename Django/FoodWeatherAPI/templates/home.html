@@ -166,21 +166,55 @@
                 }
                 #nav ul li a:active{ background-color: #b20000; }
 
+    .header img {
+        float: left;
+        width: 250px;
+        height: 100px;
+        background-color: #FFFFFF;
+        -webkit-box-shadow: 0 8px 6px -6px #999;
+        -moz-box-shadow: 0 8px 6px -6px #999;
+        box-shadow: 0 8px 6px -6px #999;
+        padding: 8px;
+    }
+
+    .header h2 {
+        position: relative;
+        top: 18px;
+        left: 10px;
+    }
+
+    .container{
+        bottom: 0;
+        height: 200px;
+        margin: auto;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 25%;
+        background-color: white;
+    }
+
 </style>
   <body>
     <div id="page"></div>
-        <div id="logo">
-            <h1><a href="/" id="logoLink"> Feather </a></h1>
-            <h2>Welcome, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2>
-            <p>Your email address: {{ user.email }}</p>
+        <div class="header">
+            <a href="/"><img src="/static/styles/img/logo.jpg" alt="logo" /></a>
         </div>
         
         <div id="nav">
             <ul>
                 <li><a href="../FoodAPI/recipes">Quick Search</a></li>
-                <li><a href="profile">My Profile</a></li>
+                <!-- <li><a href="profile">My Profile</a></li> -->
             </ul>   
         </div>
+
+        <div class="container">
+            <h2>Welcome, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2>
+            <p>Your email address: {{ user.email }}</p>
+        </div>
+        
+
     </div>
 </body>
 </html>
