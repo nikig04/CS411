@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'FoodAPI',
 
-    'social_django', # <--
+    'social_django',
+ 	'django_cron',
+]
+
+CRON_CLASSES = [
+	'FoodAPI.cron.delete_weather_objects',
 ]
 
 MIDDLEWARE = [

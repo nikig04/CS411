@@ -61,11 +61,10 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
     # return render(request, 'FoodAPI/signup.html', {'user_obj': user_obj,'is_registered':True }) # Redirect after POST
 
-#the function executes with the showdata url to display the list of registered users
-def showdata(request):
-   all_users = User.objects.all()
-   return render(request, 'registration/showdata.html', {'all_users': all_users, })
-
+# #the function executes with the showdata url to display the list of registered users
+# def showdata(request):
+#    all_users = User.objects.all()
+#    return render(request, 'registration/showdata.html', {'all_users': all_users, })
 
 def recipes(request):
 	weatherList = []
@@ -146,7 +145,6 @@ def recipes(request):
 
 			# Analyze the forecast, season, and temperature and decide what recipes to search
 			if 'Drizzle' in forecast or 'Rain' in forecast:
-				print("Rain")
 				priority1 = True
 				for ra in FoodLists.rain:
 					foodList.append(ra)
