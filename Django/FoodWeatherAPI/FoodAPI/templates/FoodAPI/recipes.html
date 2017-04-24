@@ -16,7 +16,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
-    <script type="text/javascript" src="bootstrap-progressbar.js"></script>
 
   </head>
 
@@ -242,13 +241,12 @@
         <div class="col-sm-10 input-group" id="content">
           <input type="text" name="da_input" class="form-control box-shadow--3dp" placeholder="e.g. 02215" id="search-input">
           <div class="input-group-btn">
-           <button class="btn btn-default box-shadow--3dp"id="search-btn" id="load" type="submit" >Search</button>
+          <button class="btn btn-default box-shadow--3dp" id="search-btn"type="submit" >Search</button>
 
         
         </div>
         </div>
     </div>
-
 
     </form>
    
@@ -286,24 +284,7 @@
     </div>
 </nav>
 <script>
-// Setup
-this.$('.js-loading-bar').modal({
-  backdrop: 'static',
-  show: false
-});
 
-$('#load').click(function() {
-  var $modal = $('.js-loading-bar'),
-      $bar = $modal.find('.progress-bar');
-  
-  $modal.modal('show');
-  $bar.addClass('animate');
-
-  setTimeout(function() {
-    $bar.removeClass('animate');
-    $modal.modal('hide');
-  }, 1500);
-});
 </script>
 </body>
 </html>
