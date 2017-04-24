@@ -16,6 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+    <script type="text/javascript" src="bootstrap-progressbar.js"></script>
 
   </head>
 
@@ -26,12 +27,6 @@
       font-style: normal;
       color: #666666;
       background-color: #F4F4F4;
-      margin-bottom: 60px;
-      /*background-image: url("https://static.pexels.com/photos/8313/food-eating-potatoes-beer-8313.jpg");*/
-      background-image: url("/static/styles/img/foodandbeer.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      overflow-x: hidden;
     }
 
     h2 {
@@ -158,9 +153,15 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 170%;
+        height: 60%;
         background-color: #fefdfb;
         opacity: 0.6;
+         margin-bottom: 60px;
+      /*background-image: url("https://static.pexels.com/photos/8313/food-eating-potatoes-beer-8313.jpg");*/
+      background-image: url("/static/styles/img/foodandbeer.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      overflow-x: hidden;
     }
 
     #return-to-search-btn {
@@ -186,39 +187,77 @@
         width: 100px;
     }
 
-    #search-btn:hover {
-        border-color: #e74c3c;
-        background-color: #e74c3c;
-    }
-
     #search-input {
         height: 50px;
     }
+    
+    .navbar {
+
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+    background-color: #c0392b;
+    height: 50px;
+    border: none;
+}
+
+.navbar-brand {
+    color:white !important;
+    font-weight: 600 !important;
+    margin-top: 10px;
+    font-size: 20px;
+
+}
+#myProgress {
+    width: 100%;
+    background-color: grey;
+}
+#myBar {
+    width: 1%;
+    height: 30px;
+    background-color: green;
+}
+.progress-bar.animate {
+   width: 100%;
+}
+
 
   </style>
+
   <body ng-app="indexApp">
     <div id="overlay"></div>
     <header></header>
+    <nav class="navbar navbar-default">
+        <div>
+            <h4 style="padding-left:3%; color:white;"> Feather</h4>
+        </div>
     <br><br><br>
     <div id="loading" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">
     </div>
     <form class="form-signin" id="login_form" method="post" action="/FoodAPI/recipes/">
     	{% csrf_token %}
       <div class="panel panel-default col-md-7 col-centered" id="homepage-panel">
-        <h4><strong>Please enter a Zip Code.</strong></h4>
+        <h4 style="color:white;"><strong>Please enter a Zip Code.</strong></h4>
         <br>
         <div class="col-sm-10 input-group" id="content">
           <input type="text" name="da_input" class="form-control box-shadow--3dp" placeholder="e.g. 02215" id="search-input">
           <div class="input-group-btn">
-            <button class="btn btn-default box-shadow--3dp" id="search-btn"type="submit" >Search</button>
-          </div>
+           <button class="btn btn-default box-shadow--3dp"id="search-btn" id="load" type="submit" >Search</button>
+
+        
         </div>
+        </div>
+    </div>
+
 
     </form>
+   
     <br>
+   
+        
 
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover table-striped tablesorter">
+    <div class="container" style"background-color:#F4F4F4">
+      <table class="table table-bordered table-striped table-hover tablesorter table-reponsive">
         <thead>
           <tr>
             <th class="header"> Day<i class="icon-sort"></i></th>
@@ -230,6 +269,7 @@
           </tr>
         </thead>
         <tbody>
+
             {% for key in data %}
             <tr>
                 {% for item in key %}
@@ -240,26 +280,35 @@
                 </tr>
                 {% endfor %}
 
-         
-
-
-
-            <!-- THis works a little  -->
-          
-                
-
-        <!-- </tr> -->
-          <!-- <td>{ % key["Day_1 recipes"]["Recipe_0"] %} </td> -->
-          <!-- <td> {{ key }}</td> -->
-<!-- <p> {{ key }} </p> -->
-      
-
           </tbody>
         </table>
       </div>
     </div>
+</nav>
+<script>
+// Setup
+this.$('.js-loading-bar').modal({
+  backdrop: 'static',
+  show: false
+});
+
+$('#load').click(function() {
+  var $modal = $('.js-loading-bar'),
+      $bar = $modal.find('.progress-bar');
+  
+  $modal.modal('show');
+  $bar.addClass('animate');
+
+  setTimeout(function() {
+    $bar.removeClass('animate');
+    $modal.modal('hide');
+  }, 1500);
+});
+</script>
 </body>
 </html>
+
+
 
 
    <!-- <p>{{ key}}</p> -->

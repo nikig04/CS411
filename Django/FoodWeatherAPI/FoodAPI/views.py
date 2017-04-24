@@ -14,6 +14,7 @@ import datetime
 from datetime import timedelta
 from datetime import date, datetime
 import sqlite3
+import textwrap
 
 class Vividict(dict):
 	def __missing__(self, key):
@@ -216,6 +217,7 @@ def recipes(request):
 								temp = str([each_day['recipes'][k]['extendedIngredients'][z]['amount']])
 								temp = temp[0:7] + " "
 								ingredients += temp
+								
 							#Otherwise, just add the amount
 							else:
 								ingredients += str([each_day['recipes'][k]['extendedIngredients'][z]['amount']])
@@ -229,6 +231,7 @@ def recipes(request):
 						ingredients = ingredients.replace("u'", '')
 						ingredients = ingredients.replace("'", "")
 						ingredients = ingredients.replace(" ENDTAG", ", ")
+					
 						day_recipes.append(ingredients)
 
 						k = k + 1
