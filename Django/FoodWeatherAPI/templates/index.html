@@ -122,20 +122,21 @@
     }
 
     .navbar {
-        -webkit-box-shadow: 0 8px 6px -6px #999;
-        -moz-box-shadow: 0 8px 6px -6px #999;
-        box-shadow: 0 8px 6px -6px #999;
-        background-color: #c0392b;
-        height: 70px;
-        border: none;
-    }
 
-    .navbar-brand {
-        color:white !important;
-        font-weight: 600 !important;
-        margin-top: 10px;
-        font-size: 20px;
-    }
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+    background-color: #c0392b;
+    height: 50px;
+    border: none;
+}
+
+.navbar-brand {
+    color:white !important;
+    font-weight: 600 !important;
+    margin-top: 10px;
+    font-size: 20px;
+}
 
     #merch-logo {
         height: 110px;
@@ -144,42 +145,22 @@
     #page{ margin: 20px; 
     }
 
-    #nav{
-    width: 70%;
-    display: inline-block;
-    text-align: right;
-    float: right;
-    }
-        #nav ul{}
-            #nav ul li{
-                display: inline-block;
-                height: 62px;
-            }
-                #nav ul li a{
-                    padding: 20px;
-                    background: red;
-                    color: white;
-                }
-                #nav ul li a:hover{
-                    background-color: #ff6666;
-                    box-shadow: 0px 1px 1px #666;
-                }
-                #nav ul li a:active{ background-color: #b20000; }
-
   </style>
-  <body>
-    <div id="page"></div>
+  <body> 
+
+    <nav class="navbar navbar-default">
         <div id="logo">
             <h1><a href="/FoodAPI" id="logoLink"> Feather </a></h1>
         </div>
-        <div id="nav">
+    </nav>
+
+    
             <ul>
                 <li><a href="signup">Signup</a></li>
                 <li><a href="recipes">Quick Search</a></li>
                 <li><a href="profile.html">My Profile</a></li>
             </ul>   
-        </div>
-    </div>
+
 </body>
 </html>
 

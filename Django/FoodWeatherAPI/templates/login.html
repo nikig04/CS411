@@ -1,29 +1,232 @@
-{% extends 'base.html' %}
+<!doctype html>
 
-{% block content %}
-  <h2>Log in to My Site</h2>
-  {% if form.errors %}
-    <p style="color: red">Your username and password didn't match. Please try again.</p>
-  {% endif %}
-  <form method="post">
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{{ next }}" />
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}<br>
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-        {% if field.help_text %}
-          <p><small style="color: grey">{{ field.help_text }}</small></p>
+  <html lang="en">
+
+  <head>
+
+    <title>Feather</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+     <link rel="stylesheet" href="./FoodAPI/static/styles/main.css" type="text/css">
+    <!-- <link type="text/css" rel="stylesheet" href="/static/styles/main.css" > -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+
+  </head>
+
+  <style type="text/css">
+    body {
+     background: url('/static/styles/img/login.jpeg') no-repeat center center fixed ;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
+
+}
+    }
+
+    h2 {
+      font-weight: 300;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    a {
+    color: #c0392b;
+    }
+
+    a:hover {
+        color: #c0392b;
+        text-decoration: underline;
+    }
+
+    .box-shadow--3dp {
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12)
+    }
+
+    #card-content {
+        float: left;
+    }
+
+    #card-content td {
+        padding: 0px 20px 0px 20px;
+    }
+
+    .col-centered{
+        float: none;
+        margin: 0 auto;
+    }
+
+
+    #error-message-content {
+        margin-top: 100px;
+    }
+
+    #error-message-panel {
+        width: 60%;
+        padding: 20px 10px 20px 10px;
+    }
+
+    .half {
+        position:relative;
+    }
+
+    .half:after {
+        content:'';
+        position:absolute;
+        z-index:1;
+        background:white;
+        width: 50%;
+        height: 100%;
+        left: 47%;
+    }
+
+    #homepage-panel {
+        margin-top: 150px;
+        padding: 20px 10px 40px 100px;
+        background-color: transparent;
+        border: none;
+    }
+
+    .jumbo {
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding-bottom: 100px;
+    }
+
+    #jumbo-content {
+        float: left;
+    }
+
+    #jumbo-content td {
+        padding: 20px;
+    }
+
+    #logo {
+        -webkit-box-shadow: 0 8px 6px -6px #999;
+        -moz-box-shadow: 0 8px 6px -6px #999;
+        box-shadow: 0 8px 6px -6px #999;
+        background-color: #FFFFFF;
+        padding: 8px;
+        height: 100px;
+    }
+
+    #merch-logo {
+        height: 110px;
+    }
+
+    .navbar {
+        -webkit-box-shadow: 0 8px 6px -6px #999;
+        -moz-box-shadow: 0 8px 6px -6px #999;
+        box-shadow: 0 8px 6px -6px #999;
+        background-color: #c0392b;
+        height: 70px;
+        border: none;
+    }
+
+    .navbar-brand {
+        color:white !important;
+        font-weight: 600 !important;
+        margin-top: 10px;
+        font-size: 20px;
+    }
+
+    #overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fefdfb;
+    opacity: 0.3;
+    }
+
+    #page{ margin: 20px; 
+    }
+
+    /* CSS used here will be applied after bootstrap.css */
+
+
+
+.panel-default {
+ opacity: 0.9;
+ margin-top:30px;
+}
+.form-group.last {
+ margin-bottom:0px;
+}
+
+    
+</style>
+
+<body>
+<div class=" container " >
+  <div id = "overlay"></div>
+  <div class= "container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                  <!-- <strong>Login</strong> -->
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                      {% extends 'base.html' %}
+
+      {% block content %}
+      <h2>Welcome to <strong style="color:#c0392b;">Feather</strong></h2>
+        <h4>Meals customized to your life</h4>
+        <br>
+        {% if form.errors %}
+          <p style="color: red">Your username and password didn't match. Please try again.</p>
         {% endif %}
-      </p>
-    {% endfor %}
-    <button type="submit">Log in</button>
-    <br>
-    <p><strong>-- OR --</strong></p>
-    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
-    <p><a href="{% url 'signup' %}">New to My Site? Sign up</a></p>
-  </form>
-{% endblock %}
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ next }}" />
+          {% for field in form %}
+            <p>
+              {{ field.label_tag }}<br>
+              {{ field }}<br>
+              {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+              {% endfor %}
+              {% if field.help_text %}
+                <p><small style="color: grey">{{ field.help_text }}</small></p>
+              {% endif %}
+            </p>
+          {% endfor %}
+          <button type="submit">Log in</button>
+          <br>
+          <p><strong>-- OR --</strong></p>
+          <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+          <p><a href="{% url 'signup' %}">New to My Site? Sign up</a></p>
+        </form>
+      {% endblock %}  
+                    </div>
+                
+                  
+                  
+                    </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    Not Registered? <a href="#">Register here</a></div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+ 
+
+
+</body>
+</html>
