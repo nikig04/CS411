@@ -11,6 +11,7 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+     <link rel="stylesheet" href="./FoodAPI/static/styles/main.css" type="text/css">
     <!-- <link type="text/css" rel="stylesheet" href="/static/styles/main.css" > -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
@@ -18,6 +19,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
 
   </head>
+
   <style type="text/css">
     body {
      background: url('/static/styles/img/login.jpeg') no-repeat center center fixed ;
@@ -97,7 +99,7 @@
     .jumbo {
         background-size: cover;
         background-repeat: no-repeat;
-        padding-bottom: 20px;
+        padding-bottom: 100px;
     }
 
     #jumbo-content {
@@ -117,6 +119,10 @@
         height: 100px;
     }
 
+    #merch-logo {
+        height: 110px;
+    }
+
     .navbar {
         -webkit-box-shadow: 0 8px 6px -6px #999;
         -moz-box-shadow: 0 8px 6px -6px #999;
@@ -124,15 +130,6 @@
         background-color: #c0392b;
         height: 70px;
         border: none;
-    }
-    #overlay{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fefdfb;
-    opacity: 0.3;
     }
 
     .navbar-brand {
@@ -142,8 +139,14 @@
         font-size: 20px;
     }
 
-    #merch-logo {
-        height: 110px;
+    #overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fefdfb;
+    opacity: 0.3;
     }
 
     #page{ margin: 20px; 
@@ -161,38 +164,18 @@
  margin-bottom:0px;
 }
 
-    #nav{
-    width: 70%;
-    display: inline-block;
-    text-align: right;
-    float: right;
-    }
-        #nav ul{}
-            #nav ul li{
-                display: inline-block;
-                height: 62px;
-            }
-                #nav ul li a{
-                    padding: 20px;
-                    background: red;
-                    color: white;
-                }
-                #nav ul li a:hover{
-                    background-color: #ff6666;
-                    box-shadow: 0px 1px 1px #666;
-                }
-                #nav ul li a:active{ background-color: #b20000; }
+    
 </style>
 
 <body>
-<div class="jumbotron jumbo" id="jumbo">
-  <dic id = "overlay"></div>
+<div class=" container " >
+  <div id = "overlay"></div>
   <div class= "container">
     <div class="row">
         <div class="col-md-4 col-md-offset-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                  <strong>Login</strong>
+                  <!-- <strong>Login</strong> -->
                 </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form">
@@ -200,7 +183,9 @@
                       {% extends 'base.html' %}
 
       {% block content %}
-        <h2>Log in to My Site</h2>
+      <h2>Welcome to <strong style="color:#c0392b;">Feather</strong></h2>
+        <h4>Meals customized to your life</h4>
+        <br>
         {% if form.errors %}
           <p style="color: red">Your username and password didn't match. Please try again.</p>
         {% endif %}
