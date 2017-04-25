@@ -22,14 +22,22 @@
 
   <style type="text/css">
     body {
-     background: url('/static/styles/img/login.jpeg') no-repeat center center fixed ;
- -webkit-background-size: cover;
- -moz-background-size: cover;
- -o-background-size: cover;
- background-size: cover;
-
-}
+        background: url('/static/styles/img/login.jpeg') no-repeat center center fixed ;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
     }
+/*    body{
+  background: #00589F;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00589F', endColorstr='#0073CF', GradientType=0);
+  background: -webkit-linear-gradient(to bottom, #00589F 50%, #0073CF) !important;
+  background: -moz-linear-gradient(to bottom, #00589F 50%, #0073CF) !important;
+  background: -ms-linear-gradient(to bottom, #00589F 50%, #0073CF) !important;
+  background: -o-linear-gradient(to bottom, #00589F 50%, #0073CF) !important;
+  background: linear-gradient(to bottom, #00589F 50%, #0073CF) !important;
+  color: white;
+}*/
 
     h2 {
       font-weight: 300;
@@ -149,84 +157,88 @@
     opacity: 0.3;
     }
 
+    div.well{
+      height: 250px;
+    } 
+
+    .Absolute-Center {
+      margin: auto;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background-color: #fefdfb
+    }
+
+    .Absolute-Center.is-Responsive {
+      /*width: 100%; */
+      height: 48%;
+      min-width: 100px;
+      max-width: 300px;
+      /*padding: 15px;*/
+    }
+
+    #logo-container{
+      margin: auto;
+      /*margin-bottom: 10px;*/
+      width:200px;
+      height:60px;
+      background-image:url('http://placehold.it/200x60/000000/ffffff/&text=Feather');
+    }
+
     #page{ margin: 20px; 
     }
 
     /* CSS used here will be applied after bootstrap.css */
 
+    .panel-default {
+    opacity: 0.9;
+    margin-top:30px;
+    }
 
-
-.panel-default {
- opacity: 0.9;
- margin-top:30px;
-}
-.form-group.last {
- margin-bottom:0px;
-}
+    .form-group.last {
+    margin-bottom:0px;
+    }
 
     
 </style>
-
 <body>
-<div class=" container " >
-  <div id = "overlay"></div>
-  <div class= "container">
+    
+    <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-7">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                  <!-- <strong>Login</strong> -->
-                </div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                      {% extends 'base.html' %}
-
-      {% block content %}
-      <h2>Welcome to <strong style="color:#c0392b;">Feather</strong></h2>
-        <h4>Meals customized to your life</h4>
-        <br>
-        {% if form.errors %}
-          <p style="color: red">Your username and password didn't match. Please try again.</p>
-        {% endif %}
-        <form method="post">
-          {% csrf_token %}
-          <input type="hidden" name="next" value="{{ next }}" />
-          {% for field in form %}
-            <p>
-              {{ field.label_tag }}<br>
-              {{ field }}<br>
-              {% for error in field.errors %}
-                <p style="color: red">{{ error }}</p>
-              {% endfor %}
-              {% if field.help_text %}
-                <p><small style="color: grey">{{ field.help_text }}</small></p>
-              {% endif %}
-            </p>
-          {% endfor %}
-          <button type="submit">Log in</button>
-          <br>
-          <p><strong>-- OR --</strong></p>
-          <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
-          <p><a href="{% url 'signup' %}">New to My Site? Sign up</a></p>
-        </form>
-      {% endblock %}  
-                    </div>
-                
-                  
-                  
-                    </div>
-                    </form>
-                </div>
-                <div class="panel-footer">
-                    Not Registered? <a href="#">Register here</a></div>
-            </div>
-          </div>
-        </div>
-    </div>
-</div>
+    <div class="Absolute-Center is-Responsive">
+      <div id="logo-container"></div>
+      <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <h3>Welcome to <strong style="color:#c0392b;">Feather</strong></h2>
+            <h5>Meals customized to your life</h4>
+            {% if form.errors %}
+                 <p style="color: red">Your username and password didn't match. Please try again.</p>
+            {% endif %}
  
-
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}" />
+                {% for field in form %}
+                  <p>
+                    {{ field.label_tag }}<br>
+                    {{ field }}<br>
+                    {% for error in field.errors %}
+                      <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                    {% if field.help_text %}
+                      <p><small style="color: grey">{{ field.help_text }}</small></p>
+                    {% endif %}
+                  </p>
+                {% endfor %}
+                <button type="submit">Log in</button>
+                <br>
+                <br>
+                <p><strong>-- OR --</strong></p>
+                <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+                <a href="{% url 'signup' %}">New to My Site? Sign up</a>
+            </form>        
+        </div>  
+    </div>    
+    </div>
+    </div>
 
 </body>
 </html>
