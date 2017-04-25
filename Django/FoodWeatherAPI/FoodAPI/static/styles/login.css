@@ -1,4 +1,10 @@
-
+body {
+        background: url('/static/styles/img/login.jpeg') no-repeat center center fixed ;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 
     h2 {
       font-weight: 300;
@@ -118,19 +124,43 @@
     opacity: 0.3;
     }
 
+    div.well{
+      height: 250px;
+    } 
+
+    .Absolute-Center {
+      margin: auto;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background-color: #fefdfb
+    }
+
+    .Absolute-Center.is-Responsive {
+      /*width: 100%; */
+      height: 48%;
+      min-width: 100px;
+      max-width: 300px;
+      /*padding: 15px;*/
+    }
+
+    #logo-container{
+      margin: auto;
+      /*margin-bottom: 10px;*/
+      width:200px;
+      height:60px;
+      background-image:url('http://placehold.it/200x60/000000/ffffff/&text=Feather');
+    }
+
     #page{ margin: 20px; 
     }
 
     /* CSS used here will be applied after bootstrap.css */
 
+    .panel-default {
+    opacity: 0.9;
+    margin-top:30px;
+    }
 
-
-.panel-default {
- opacity: 0.9;
- margin-top:30px;
-}
-.form-group.last {
- margin-bottom:0px;
-}
-
-    
+    .form-group.last {
+    margin-bottom:0px;
+    }

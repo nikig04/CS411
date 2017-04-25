@@ -1,0 +1,187 @@
+body {
+      font-family: "Open Sans", sans-serif;
+      font-style: normal;
+      color: #666666;
+      background-color: #F4F4F4;
+      margin-bottom: 60px;
+      background-image: url("/static/styles/img/food-healthy-lunch.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      overflow-x: hidden;
+    }
+
+    h2 {
+        font-weight: 300;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    a {
+        color: #c0392b;
+    }
+
+    a:hover {
+        color: #c0392b;
+        text-decoration: underline;
+    }
+
+    .box-shadow--3dp {
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12)
+    }
+
+    #button{
+
+    }
+
+    #card-content {
+        float: left;
+    }
+
+    #card-content td {
+        padding: 0px 20px 0px 20px;
+    }
+
+    .col-centered{
+        float: none;
+        margin: 0 auto;
+    }
+
+
+    #error-message-content {
+        margin-top: 100px;
+    }
+
+    #error-message-panel {
+        width: 60%;
+        padding: 20px 10px 20px 10px;
+    }
+
+    .half {
+        position:relative;
+    }
+
+    .half:after {
+        content:'';
+        position:absolute;
+        z-index:1;
+        background:white;
+        width: 50%;
+        height: 100%;
+        left: 47%;
+    }
+
+    #homepage-panel {
+        margin-top: 150px;
+        padding: 20px 10px 40px 100px;
+        background-color: transparent;
+        border: none;
+    }
+
+    .jumbo {
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding-bottom: 20px;
+    }
+
+    #jumbo-content {
+        float: left;
+    }
+
+    #jumbo-content td {
+        padding: 20px;
+    }
+
+    #logo {
+        -webkit-box-shadow: 0 8px 6px -6px #999;
+        -moz-box-shadow: 0 8px 6px -6px #999;
+        box-shadow: 0 8px 6px -6px #999;
+        background-color: #FFFFFF;
+        padding: 8px;
+        height: 100px;
+    }
+
+    .navbar {
+        -webkit-box-shadow: 0 8px 6px -6px #999;
+        -moz-box-shadow: 0 8px 6px -6px #999;
+        box-shadow: 0 8px 6px -6px #999;
+        background-color: #c0392b;
+        height: 100px;
+        border: none;
+    }
+
+    .navbar-brand {
+        color:white !important;
+        font-weight: 600 !important;
+        margin-top: 10px;
+        font-size: 20px;
+    }
+
+    #merch-logo {
+        height: 110px;
+    }
+
+    #page{ margin: 20px; 
+    }
+
+ /*   #nav{
+    width: 70%;
+    display: inline-block;
+    text-align: right;
+    float: right;
+    }
+        #nav ul{}
+            #nav ul li{
+                display: inline-block;
+                height: 62px;
+            }
+                #nav ul li a{
+                    padding: 20px;
+                    background: red;
+                    color: white;
+                }
+                #nav ul li a:hover{
+                    background-color: #ff6666;
+                    box-shadow: 0px 1px 1px #666;
+                }
+                #nav ul li a:active{ background-color: #b20000; }*/
+
+    #overlay{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fefdfb;
+        opacity: 0.3;
+    }
+
+    .header img {
+        float: left;
+        width: 250px;
+        height: 100px;
+        background-color: #FFFFFF;
+        -webkit-box-shadow: 0 8px 6px -6px #999;
+        -moz-box-shadow: 0 8px 6px -6px #999;
+        box-shadow: 0 8px 6px -6px #999;
+        padding: 8px;
+    }
+
+    .header h2 {
+        position: relative;
+        top: 18px;
+        left: 10px;
+    }
+
+    .container{
+        bottom: 0;
+        height: 200px;
+        margin: auto;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 25%;
+        background-color: white;
+    }
