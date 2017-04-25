@@ -20,11 +20,12 @@
   </head>
   <style type="text/css">
     body {
-     background: url('/static/styles/img/login.jpeg') no-repeat center center fixed; 
+     background: url('/static/styles/img/login.jpeg') no-repeat center center fixed ;
  -webkit-background-size: cover;
  -moz-background-size: cover;
  -o-background-size: cover;
  background-size: cover;
+
 }
     }
 
@@ -124,6 +125,15 @@
         height: 70px;
         border: none;
     }
+    #overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fefdfb;
+    opacity: 0.3;
+    }
 
     .navbar-brand {
         color:white !important;
@@ -175,7 +185,9 @@
 </style>
 
 <body>
-  <div class="container">
+<div class="jumbotron jumbo" id="jumbo">
+  <dic id = "overlay"></div>
+  <div class= "container">
     <div class="row">
         <div class="col-md-4 col-md-offset-7">
             <div class="panel panel-default">
@@ -224,6 +236,7 @@
                 <div class="panel-footer">
                     Not Registered? <a href="#">Register here</a></div>
             </div>
+          </div>
         </div>
     </div>
 </div>
