@@ -1,65 +1,67 @@
-<!doctype html>
+	  <!doctype html>
 
-  <html lang="en">
+	    <html lang="en">
 
-  <head>
+	    <head>
 
-    <title>Feather</title>
+	      <title>Feather</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	      <meta charset="UTF-8">
+	      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/styles/login.css" type="text/css">
-    <link type="text/css" rel="stylesheet" href="/static/styles/login.css" >
+	      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+	      <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+	      <link rel="stylesheet" href="/static/styles/login.css" type="text/css">
+	      <link type="text/css" rel="stylesheet" href="/static/styles/login.css" >
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+	      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	      <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
 
-  </head>
+	    </head>
 
-<body>
-    
-    <div class="container">
-    <div class="row">
-    <div class="Absolute-Center is-Responsive">
-      <div id="logo-container"></div>
-      <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <h3>Welcome to <strong style="color:#c0392b;">Feather</strong></h2>
-            <h5>Food for your weather, what could be better?</h4>
-            {% if form.errors %}
-                 <p style="color: red">Your username and password didn't match. Please try again.</p>
-            {% endif %}
- 
-            <form method="post">
-                {% csrf_token %}
-                <input type="hidden" name="next" value="{{ next }}" />
-                {% for field in form %}
-                  <p>
-                    {{ field.label_tag }}<br>
-                    {{ field }}<br>
-                    {% for error in field.errors %}
-                      <p style="color: red">{{ error }}</p>
-                    {% endfor %}
-                    {% if field.help_text %}
-                      <p><small style="color: grey">{{ field.help_text }}</small></p>
-                    {% endif %}
-                  </p>
-                {% endfor %}
-                <button type="submit">Log in</button>
-                <br>
-                <br>
-                <p><strong>-- OR --</strong></p>
-                <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
-                <br>
-                <a href="{% url 'signup' %}">New to My Site? Sign up</a>
-            </form>        
-        </div>  
-    </div>    
-    </div>
-    </div>
+	<body>
+	      
+	 <div class="container">
+	   <div class="row">
+	     <div class="Absolute-Center is-Responsive">
+	       <div id="logo-container"></div>
+	        <div class="col-sm-12 col-md-11 col-md-offset-1" style="padding-bottom: 50px; background-color: white;">
+	          <div id= "text-container">
+	              <h3>Welcome to <strong style="color:#c0392b;">Feather</strong></h3>
+	              <h5>Food for your weather, what could be better?</h5>
+	              {% if form.errors %}
+	                   <p style="color: red">Your username and password didn't match. Please try again.</p>
+	              {% endif %}
+	   
+	              <form method="post">
+	                  {% csrf_token %}
+	                  <input type="hidden" name="next" value="{{ next }}" />
+	                  {% for field in form %}
+	                    <p>
+	                      {{ field.label_tag }}<br>
+	                      {{ field }}<br>
+	                      {% for error in field.errors %}
+	                        <p style="color: red">{{ error }}</p>
+	                      {% endfor %}
+	                      {% if field.help_text %}
+	                        <p><small style="color: grey">{{ field.help_text }}</small></p>
+	                      {% endif %}
+	                    </p>
+	                  {% endfor %}
+	                  <button type="submit">Log in</button>
+	                  <br>
+	                  <br>
+	                  <p><strong>-- OR --</strong></p>
+	                  <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+	                  <br>
+	                  <a href="{% url 'signup' %}">New to My Site? Sign up</a>
+	              </form>     
+	     		 </div>
+	     	 </div>
+	     	</div>
+	     </div>
+	   </div>
 
-</body>
+ </body>
 </html>

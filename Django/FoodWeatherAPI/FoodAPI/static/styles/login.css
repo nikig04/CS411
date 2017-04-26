@@ -147,10 +147,14 @@ body {
       margin: auto;
       /*margin-bottom: 10px;*/
       width:200px;
-      height:60px;
-      background-image:url('http://placehold.it/200x60/000000/ffffff/&text=Feather');
+      height:90px;
+      background-image:url('http://placehold.it/300x90/000000/ffffff/&text=Feather');
     }
 
+    #text-container{
+        background-color: #FFFFFF;
+        padding-bottom: 200px;
+    }
     #page{ margin: 20px; 
     }
 
