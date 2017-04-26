@@ -337,11 +337,11 @@ var waitingDialog = waitingDialog || (function ($) {
                 options = {};
             }
             if (typeof message === 'undefined') {
-                message = 'Loading';
+                message = 'Personalizing recipes based on your weather forecast...';
             }
             var settings = $.extend({
                 dialogSize: 'm',
-                progressType: '',
+                progressType: 'danger',
                 onHide: null // This callback runs after the dialog was hidden
             }, options);
 
