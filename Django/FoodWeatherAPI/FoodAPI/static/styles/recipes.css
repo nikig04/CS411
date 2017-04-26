@@ -1,11 +1,11 @@
-body {
+    body {
       font-family: "Open Sans", sans-serif;
       font-style: normal;
       color: #666666;
       margin-bottom: 60px;
-      background-image: url("/static/styles/img/food-healthy-lunch.jpg");
+/*      background-image: url("/static/styles/img/food-healthy-lunch.jpg");
       background-size: cover;
-      background-repeat: no-repeat;
+      background-repeat: no-repeat;*/
       overflow-x: hidden;
     }
 
@@ -30,10 +30,6 @@ body {
         box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12)
     }
 
-    #button{
-
-    }
-
     #card-content {
         float: left;
     }
@@ -55,6 +51,17 @@ body {
     #error-message-panel {
         width: 60%;
         padding: 20px 10px 20px 10px;
+    }
+
+    .fb-share-button {
+        transform: scale(1.5);
+        -ms-transform: scale(1.5);
+        -webkit-transform: scale(1.5);
+        -o-transform: scale(1.5);
+        -moz-transform: scale(1.5);
+        float: left;
+        margin-right: 22%;
+        margin-left: 8%;
     }
 
     .half {
@@ -100,20 +107,7 @@ body {
         height: 100px;
     }
 
-    .navbar {
-        -webkit-box-shadow: 0 8px 6px -6px #999;
-        -moz-box-shadow: 0 8px 6px -6px #999;
-        box-shadow: 0 8px 6px -6px #999;
-        background-color: #c0392b;
-        height: 70px;
-        border: none;
-    }
-
-    .navbar-brand {
-        color:white !important;
-        font-weight: 600 !important;
-        margin-top: 10px;
-        font-size: 20px;
+    #page{ margin: 20px; 
     }
 
     #merch-logo {
@@ -125,44 +119,73 @@ body {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
-/*        background-image: url("/static/styles/img/food-healthy-lunch.jpg");
+        height: 60%;
+        background-color: #fefdfb;
+        opacity: 0.6;
+        margin-bottom: 60px;
+        /*background-image: url("https://static.pexels.com/photos/8313/food-eating-potatoes-beer-8313.jpg");*/
+        background-image: url("/static/styles/img/foodandbeer.jpg");
         background-size: cover;
-        background-repeat: no-repeat;*/
-        background-color: #fefdfb
-        opacity: 0.1;
-        filter:alpha(opacity=10);
-        pointer-events:none;
+        background-repeat: no-repeat;
+        overflow-x: hidden;
     }
 
-    #page{ margin: 20px; 
+    .navbar {
+        -webkit-box-shadow: 0 8px 6px -6px #999;
+        -moz-box-shadow: 0 8px 6px -6px #999;
+        box-shadow: 0 8px 6px -6px #999;
+        background-color: #c0392b;
+        /*padding-top: 50px;*/
+        height: 70px;
+        border: none;
     }
 
-    #nav{
-    width: 60%;
-    display: inline-block;
-    text-align: right;
-    float: right;
-    /*position: absolute;*/
+    .navbar-brand {
+        color:white !important;
+        font-weight: 600 !important;
+        margin-top: 10px;
+        font-size: 20px;
     }
-    #nav ul{}
-        #nav ul li{
-            display: inline-block;
-            height: 62px;
 
-        }
-            #nav ul li a{
-                padding: 20px;
-                background: #c0392b;
-                color: white;
-            }
-            #nav ul li a:hover{
-                background-color: #c0392b;
-                box-shadow: 0px 1px 1px #666;
-            }
-            #nav ul li a:active{ background-color: #c0392b; }
+    #return-to-search-btn {
+        font-family: "Open Sans", sans-serif;
+        border-color: #c0392b;
+        border-width: 2px;
+        color: #FFFFFF;
+        background-color: #c0392b;
+    }
 
+    #return-to-search-btn:hover {
+        border-color: #e74c3c;
+        background-color: #e74c3c;
+    }
+
+    #search-btn {
+        font-family: "Open Sans", sans-serif;
+        border-color: #c0392b;
+        border-width: 2px;
+        color: #FFFFFF;
+        background-color: #c0392b;
+        height: 50px;
+        width: 100px;
+    }
+
+    #search-input {
+        height: 50px;
+    }
     
+    #myProgress {
+        width: 100%;
+        background-color: grey;
+    }
+    #myBar {
+        width: 1%;
+        height: 30px;
+        background-color: green;
+    }
+    .progress-bar.animate {
+       width: 100%;
+    }
 
     .header img {
         float: left;
@@ -176,19 +199,7 @@ body {
     }
 
     .header h2 {
-        position: relative;
-        top: 18px;
-        left: 10px;
-    }
-
-    .container{
-        bottom: 0;
-        height: 200px;
-        margin: auto;
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 25%;
-        background-color: white;
+      position: relative;
+      top: 18px;
+      left: 10px;
     }
