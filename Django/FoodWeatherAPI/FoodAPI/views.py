@@ -72,8 +72,11 @@ def recipes(request):
 	jsonList = []
 	if request.POST:
 		zipcode = request.POST.get('da_input')
-		w_zipcode = Weather.objects.all().filter(zipcode=zipcode)
+		if zipcode == "":
+			parsedData2 = [['', 'Please input a valid zipcode', '', '', '', '']]
+			return render(request, 'FoodAPI/recipes.html', {'data': parsedData2})
 
+		w_zipcode = Weather.objects.all().filter(zipcode=zipcode)
 		if w_zipcode.exists():
 			weatherList = Weather.objects.all().filter(zipcode=zipcode).values('average_temp')
 			forecastList = Weather.objects.all().filter(zipcode=zipcode).values('forecast')
