@@ -21,10 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'd$^!x=ynlsor267627y%vw&nb8k@zfcaj8aebb2%udzux-mx@-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -41,11 +41,11 @@ INSTALLED_APPS = [
     'FoodAPI',
 
     'social_django',
- 	'django_cron',
+    'django_cron',
 ]
 
 CRON_CLASSES = [
-	'FoodAPI.cron.delete_weather_objects',
+    'FoodAPI.cron.delete_weather_objects',
 ]
 
 MIDDLEWARE = [
@@ -91,8 +91,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET')  # App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = '259911221140799'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '5367650d91f0f41ff2ee9d0aa4cd9860'  # App Secret
 
 WSGI_APPLICATION = 'FoodWeatherAPI.wsgi.application'
 
