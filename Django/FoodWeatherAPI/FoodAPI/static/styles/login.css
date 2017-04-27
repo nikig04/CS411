@@ -98,7 +98,7 @@ body {
         height: 110px;
     }
 
-    .navbar {
+/*    .navbar {
         -webkit-box-shadow: 0 8px 6px -6px #999;
         -moz-box-shadow: 0 8px 6px -6px #999;
         box-shadow: 0 8px 6px -6px #999;
@@ -112,7 +112,7 @@ body {
         font-weight: 600 !important;
         margin-top: 10px;
         font-size: 20px;
-    }
+    }*/
 
     #overlay{
     position: absolute;
@@ -136,28 +136,29 @@ body {
     }
 
     .Absolute-Center.is-Responsive {
-      /*width: 100%; */
-      height: 48%;
+      width: 18%; 
+      height: 49%;
       min-width: 100px;
       max-width: 300px;
-      /*padding: 15px;*/
+      /*padding-top: 20px;*/
     }
 
     #logo-container{
       margin: auto;
       /*margin-bottom: 10px;*/
       width:200px;
-      height:90px;
-      background-image:url('http://placehold.it/200x100/000000/ffffff/&text=Feather');
+      height:60px;
+      background-image:url('/static/styles/img/featherLogo.png');
     }
 
-    #text-container{
+/*    #text-container{
         background-color: #FFFFFF;
         padding-bottom: 200px;
-    }
-    #page{ margin: 20px; 
-    }
+    }*/
 
+/*    #page{ margin: 20px; 
+    }
+*/
     /* CSS used here will be applied after bootstrap.css */
 
     .panel-default {
