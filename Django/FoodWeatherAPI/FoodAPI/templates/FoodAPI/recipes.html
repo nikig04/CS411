@@ -34,8 +34,12 @@
             <div class="header">
                 <a href="/"><img src="/static/styles/img/logo.jpg" alt="logo" /></a>
             </div>
-            <!-- <h3 style="padding-left:3%; color:white;"> Feather</h3> -->
-        </div>
+            
+            <div id="nav">
+              <ul>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+              </ul> 
+            </div>
     <br><br><br>
     <div id="loading" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">
     </div>
@@ -71,10 +75,10 @@
           <tr>
             <th class="header"> Day<i class="icon-sort"></i></th>
             <th class="header"> Average Weather<i class="icon-sort"></i></th>
-	    <th class="header"> Forecast<i class="icon-sort"></i></th>
+	          <th class="header"> Forecast<i class="icon-sort"></i></th>
             <th class="header"> Name <i class="icon-sort"></i></th>
-             <th class="header"> Link to Recipe <i class="icon-sort"></i></th>
-              <th class="header"> Ingredients <i class="icon-sort"></i></th>
+            <th class="header"> Link to Recipe <i class="icon-sort"></i></th>
+            <th class="header"> Ingredients <i class="icon-sort"></i></th>
           </tr>
         </thead>
         <tbody>

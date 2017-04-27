@@ -28,19 +28,20 @@
 
             </div>
 
-        </nav>
-
-        <div id="nav">
+            <div id="nav">
             <ul>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>   
         </div>
+        </nav>
+
+
 
         <div class="container">
-            <h2>Welcome, <strong>{{ user.first_name }}</strong>!</h2>
-            <p>Your email address: {{ user.email }}</p>
+            <h2 align='center'>Welcome, <strong>{{ user.first_name }}</strong>!</h2>
+            <p style="font-size: 14px; color: black" align='center'>Your email address: {{ user.email }}</p>
 
-            <center><button class="btn btn-default box-shadow--3dp" style="background-color:brown; color:white;"  type="submit" onclick="window.location.href='../FoodAPI/recipes'">Search For Recipes</button></center>
+            <center><button class="btn btn-default box-shadow--3dp" style="background-color:#800000; color:white;"  type="submit" onclick="window.location.href='../FoodAPI/recipes'">Search For Recipes</button></center>
         </div>
        
         

@@ -135,29 +135,32 @@ body {
         pointer-events:none;
     }
 
-    #page{ margin: 20px; 
+    #page{margin: 20px; 
     }
 
     #nav{
     width: 60%;
+    height: 70px;
     display: inline-block;
     text-align: right;
     float: right;
+    padding-top: 26px; 
     /*position: absolute;*/
     }
+
     #nav ul{}
         #nav ul li{
             display: inline-block;
-            height: 62px;
+            height: 70px;
 
         }
             #nav ul li a{
                 padding: 20px;
-                background: #c0392b;
+                background: #800000;
                 color: white;
             }
             #nav ul li a:hover{
-                background-color: #c0392b;
+                background-color: #B22222;
                 box-shadow: 0px 1px 1px #666;
             }
             #nav ul li a:active{ background-color: #c0392b; }
