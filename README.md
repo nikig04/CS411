@@ -1,5 +1,5 @@
 # CS411
-Feather
+## Feather
 Website for Seasonal food choices personalized to you
 
 Feather is web application that allows users to view the weather for the week and plan their meals accordingly for the comfort of their lives. Feather uses an Open Weather API and a Food APIs to calculate and return simple meals for the right weather.
