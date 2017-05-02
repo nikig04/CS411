@@ -24,13 +24,11 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^FoodAPI/', include('FoodAPI.urls')),
 
-    url(r'^$', views.home, name='home'), # <--
+    url(r'^$', views.home, name='home'),
     url(r'^index/$', views.index, name='index'),
     url(r'^signup/$', views.signup, name='signup'),
-    # url(r'^login/$', auth_views.login, name='login'), # <--
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/login'}, name='logout'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
-    # url(r'^showdata/$', views.showdata, name='showdata'),
 
 ]

@@ -1,8 +1,8 @@
 <!doctype html>
 
-  <html lang="en">
+<html lang="en">
 
-  <head>
+<head>
 
     <title>Feather</title>
 
@@ -11,162 +11,168 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="/static/styles/recipes.css" >
+    <link type="text/css" rel="stylesheet" href="/static/styles/recipes.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
 
-  </head>
+</head>
 
-  <style>
+<style>
+</style>
 
-
-
-  </style>
-
-  <body ng-app="indexApp">
+<body ng-app="indexApp">
     <div id="page"></div>
     <div id="overlay"></div>
     <header></header>
     <nav class="navbar navbar-default">
         <div>
             <div class="header">
-                <a href="/"><img src="/static/styles/img/logo.jpg" alt="logo" /></a>
+                <a href="/"><img src="/static/styles/img/logo.jpg" alt="logo" />
+                </a>
             </div>
-            
+
             <div id="nav">
-              <ul>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-              </ul> 
+                <ul>
+                    <li><a href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
             </div>
-    <br><br><br>
-    <div id="loading" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">
-    </div>
-    <form class="form-signin" id="login_form" method="post" action="/FoodAPI/recipes/">
-    	{% csrf_token %}
-      <div class="panel panel-default col-md-7 col-centered" id="homepage-panel">
-        <h4 style="color:black;"><strong>Please enter a Zip Code.</strong></h4>
+            <br>
+            <br>
+            <br>
+            <div id="loading" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">
+            </div>
+            <form class="form-signin" id="login_form" method="post" action="/FoodAPI/recipes/">
+                {% csrf_token %}
+                <div class="panel panel-default col-md-7 col-centered" id="homepage-panel">
+                    <h4 style="color:black;"><strong>Please enter a Zip Code.</strong></h4>
+                    <br>
+                    <div class="col-sm-10 input-group" id="content">
+                        <input type="text" name="da_input" class="form-control box-shadow--3dp" placeholder="e.g. 02215" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default box-shadow--3dp" onclick="waitingDialog.show(); setTimeout(function () {waitingDialog.hide();}, 5000);" id="search-btn" type="submit">Search</button>
+
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        </div>
+
+
         <br>
-        <div class="col-sm-10 input-group" id="content">
-          <input type="text" name="da_input" class="form-control box-shadow--3dp" placeholder="e.g. 02215" id="search-input">
-          <div class="input-group-btn">
-          <button class="btn btn-default box-shadow--3dp" onclick="waitingDialog.show(); setTimeout(function () {waitingDialog.hide();}, 5000);" id="search-btn" type="submit" >Search</button>
-        
-        
+
+
+
+        <div class="container">
+            <table class="table table-bordered table-striped table-hover tablesorter table-reponsive">
+                <thead>
+                    <tr>
+                        <th class="header"> Day<i class="icon-sort"></i>
+                        </th>
+                        <th class="header"> Average Weather<i class="icon-sort"></i>
+                        </th>
+                        <th class="header"> Forecast<i class="icon-sort"></i>
+                        </th>
+                        <th class="header"> Name <i class="icon-sort"></i>
+                        </th>
+                        <th class="header"> Link to Recipe <i class="icon-sort"></i>
+                        </th>
+                        <th class="header"> Ingredients <i class="icon-sort"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for key in data %}
+                    <tr>
+                        {% for item in key %}
+                        <!-- {% if(item in key) -->
+                        <td> {{ item }}</td>
+                        {% endfor %}
+                        <!--  <td>{{ key }} </td> -->
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
         </div>
         </div>
-    </div>
-       </form>   
-<!--        <pre>-->
-<!--waitingDialog.show();</pre>-->
-        
-</div>
-</div>
+    </nav>
+    <script>
+    
+        /**
+         * Module for displaying "Waiting for..." dialog using Bootstrap
+         */
 
+        var waitingDialog = waitingDialog || (function($) {
+            'use strict';
 
-    <br>
-   
-        
-
-    <div class="container">
-      <table class="table table-bordered table-striped table-hover tablesorter table-reponsive">
-        <thead>
-          <tr>
-            <th class="header"> Day<i class="icon-sort"></i></th>
-            <th class="header"> Average Weather<i class="icon-sort"></i></th>
-	          <th class="header"> Forecast<i class="icon-sort"></i></th>
-            <th class="header"> Name <i class="icon-sort"></i></th>
-            <th class="header"> Link to Recipe <i class="icon-sort"></i></th>
-            <th class="header"> Ingredients <i class="icon-sort"></i></th>
-          </tr>
-        </thead>
-        <tbody>
-
-            {% for key in data %}
-            <tr>
-                {% for item in key %}
-                <!-- {% if(item in key) -->
-                     <td> {{ item }}</td>
-                {% endfor %}
-                   <!--  <td>{{ key }} </td> -->
-                
-                </tr>
-                {% endfor %}
-
-          </tbody>
-        </table>
-      </div>
-    </div>
-</nav>
-<script>
-/**
- * Module for displaying "Waiting for..." dialog using Bootstrap
- */
-
-var waitingDialog = waitingDialog || (function ($) {
-    'use strict';
-
-    // Creating modal dialog's DOM
-    var $dialog = $(
-        '<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">' +
-        '<div class="modal-dialog modal-m">' +
-        '<div class="modal-content">' +
-            '<div class="modal-header"><h3 style="margin:0;"></h3></div>' +
-            '<div class="modal-body">' +
+            // Creating modal dialog's DOM
+            var $dialog = $(
+                '<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">' +
+                '<div class="modal-dialog modal-m">' +
+                '<div class="modal-content">' +
+                '<div class="modal-header"><h3 style="margin:0;"></h3></div>' +
+                '<div class="modal-body">' +
                 '<div class="progress progress-striped active" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div>' +
-            '</div>' +
-        '</div></div></div>');
+                '</div>' +
+                '</div></div></div>');
 
-    return {
-        /**
-         * Opens our dialog
-         * @param message Custom message
-         * @param options Custom options:
-         *                options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
-         *                options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning".
-         */
-        show: function (message, options) {
-            // Assigning defaults
-            if (typeof options === 'undefined') {
-                options = {};
-            }
-            if (typeof message === 'undefined') {
-                message = 'Personalizing recipes based on your weather forecast...';
-            }
-            var settings = $.extend({
-                dialogSize: 'm',
-                progressType: 'danger',
-                onHide: null // This callback runs after the dialog was hidden
-            }, options);
+            return {
+                /**
+                 * Opens our dialog
+                 * @param message Custom message
+                 * @param options Custom options:
+                 *                options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
+                 *                options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning".
+                 */
+                show: function(message, options) {
+                    // Assigning defaults
+                    if (typeof options === 'undefined') {
+                        options = {};
+                    }
+                    if (typeof message === 'undefined') {
+                        message = 'Personalizing recipes based on your weather forecast...';
+                    }
+                    var settings = $.extend({
+                        dialogSize: 'm',
+                        progressType: 'danger',
+                        onHide: null // This callback runs after the dialog was hidden
+                    }, options);
 
-            // Configuring dialog
-            $dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
-            $dialog.find('.progress-bar').attr('class', 'progress-bar');
-            if (settings.progressType) {
-                $dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
-            }
-            $dialog.find('h3').text(message);
-            // Adding callbacks
-            if (typeof settings.onHide === 'function') {
-                $dialog.off('hidden.bs.modal').on('hidden.bs.modal', function (e) {
-                    settings.onHide.call($dialog);
-                });
-            }
-            // Opening dialog
-            $dialog.modal();
-        },
-        /**
-         * Closes dialog
-         */
-        hide: function () {
-            $dialog.modal('hide');
-        }
-    };
+                    // Configuring dialog
+                    $dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
+                    $dialog.find('.progress-bar').attr('class', 'progress-bar');
+                    if (settings.progressType) {
+                        $dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
+                    }
+                    $dialog.find('h3').text(message);
+                    // Adding callbacks
+                    if (typeof settings.onHide === 'function') {
+                        $dialog.off('hidden.bs.modal').on('hidden.bs.modal', function(e) {
+                            settings.onHide.call($dialog);
+                        });
+                    }
+                    // Opening dialog
+                    $dialog.modal();
+                },
+                /**
+                 * Closes dialog
+                 */
+                hide: function() {
+                    $dialog.modal('hide');
+                }
+            };
 
-})(jQuery);
-
-</script>
+        })(jQuery);
+    </script>
 
 </body>
+
 </html>

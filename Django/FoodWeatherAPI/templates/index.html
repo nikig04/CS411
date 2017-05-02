@@ -1,8 +1,8 @@
 <!doctype html>
 
-  <html lang="en">
+<html lang="en">
 
-  <head>
+<head>
 
     <title>Feather</title>
 
@@ -11,156 +11,42 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
-    <!-- <link type="text/css" rel="stylesheet" href="/static/styles/main.css" > -->
+    <link type="text/css" rel="stylesheet" href="/static/styles/home.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
 
-  </head>
+</head>
 
-  <style>
-
-    body {
-      font-family: "Open Sans", sans-serif;
-      font-style: normal;
-      color: #666666;
-      background-color: #F4F4F4;
-      margin-bottom: 60px;
-      background-image: url("/static/styles/img/food-healthy-lunch.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      overflow-x: hidden;
-    }
-
-    h2 {
-      font-weight: 300;
-    }
-
-    p {
-      font-size: 16px;
-    }
-
-    a {
-    color: #c0392b;
-    }
-
-    a:hover {
-        color: #c0392b;
-        text-decoration: underline;
-    }
-
-    .box-shadow--3dp {
-        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12)
-    }
-
-    #card-content {
-        float: left;
-    }
-
-    #card-content td {
-        padding: 0px 20px 0px 20px;
-    }
-
-    .col-centered{
-        float: none;
-        margin: 0 auto;
-    }
-
-
-    #error-message-content {
-        margin-top: 100px;
-    }
-
-    #error-message-panel {
-        width: 60%;
-        padding: 20px 10px 20px 10px;
-    }
-
-    .half {
-        position:relative;
-    }
-
-    .half:after {
-        content:'';
-        position:absolute;
-        z-index:1;
-        background:white;
-        width: 50%;
-        height: 100%;
-        left: 47%;
-    }
-
-    #homepage-panel {
-        margin-top: 150px;
-        padding: 20px 10px 40px 100px;
-        background-color: transparent;
-        border: none;
-    }
-
-    .jumbo {
-        background-size: cover;
-        background-repeat: no-repeat;
-        padding-bottom: 20px;
-    }
-
-    #jumbo-content {
-        float: left;
-    }
-
-    #jumbo-content td {
-        padding: 20px;
-    }
-
-    #logo {
-        -webkit-box-shadow: 0 8px 6px -6px #999;
-        -moz-box-shadow: 0 8px 6px -6px #999;
-        box-shadow: 0 8px 6px -6px #999;
-        background-color: #FFFFFF;
-        padding: 8px;
-        height: 100px;
-    }
-
-    .navbar {
-
-    -webkit-box-shadow: 0 8px 6px -6px #999;
-    -moz-box-shadow: 0 8px 6px -6px #999;
-    box-shadow: 0 8px 6px -6px #999;
-    background-color: #c0392b;
-    height: 50px;
-    border: none;
-}
-
-.navbar-brand {
-    color:white !important;
-    font-weight: 600 !important;
-    margin-top: 10px;
-    font-size: 20px;
-}
-
-    #merch-logo {
-        height: 110px;
-    }
-
-    #page{ margin: 20px; 
-    }
-
-  </style>
-  <body> 
-
+<body>
+    <div id="overlay"></div>
+    <div id="page"></div>
     <nav class="navbar navbar-default">
-        <div id="logo">
-            <h1><a href="/FoodAPI" id="logoLink"> Feather </a></h1>
+        <div class="header">
+            <a href="/"><img src="/static/styles/img/logo.jpg" alt="logo" />
+            </a>
+
+        </div>
+
+        <div id="nav">
+            <ul>
+                <li><a href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
         </div>
     </nav>
 
-    
-            <ul>
-                <li><a href="signup">Signup</a></li>
-                <li><a href="recipes">Quick Search</a></li>
-                <li><a href="profile.html">My Profile</a></li>
-            </ul>   
 
+
+    <div class="container">
+        <h2 align='center'>Welcome, <strong>{{ user.first_name }}</strong>!</h2>
+        <center>
+            <button class="btn btn-default box-shadow--3dp" style="background-color:#800000; color:white;" type="submit" onclick="window.location.href='../FoodAPI/recipes'">Search For Recipes</button>
+        </center>
+    </div>
+
+    </div>
 </body>
-</html>
 
+</html>

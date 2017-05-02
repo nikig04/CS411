@@ -8,5 +8,4 @@ app_name = 'FoodAPI'
 
 urlpatterns = [
 	url(r'^recipes/$', views.recipes, name='recipes'),
-
 	]

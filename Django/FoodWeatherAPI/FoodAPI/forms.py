@@ -13,10 +13,3 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
-# class UserForm(forms.Form):
-#     # to take the input of username
-#     username = forms.CharField(max_length=100)
-#     # to take the input of email
-#     email = forms.CharField(max_length=100)
-#     # to take the input of password
-#     password = forms.CharField(widget=forms.PasswordInput)

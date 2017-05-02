@@ -25,7 +25,6 @@ def recipes(zip):
         weatherList.append(userData)
         userData = {}
     weatherList = weatherList[1:]
-    # print (weatherList)
 
     i = 1
     parsedData2 = []
@@ -64,7 +63,5 @@ def recipes(zip):
 
     print(parsedData2)
     return parsedData2
-    # print(jsonList2)
-    # return jsonList2
 
 recipes("02116")

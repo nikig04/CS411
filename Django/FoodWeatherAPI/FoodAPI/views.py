@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import login, authenticate
-# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-
 from FoodAPI.forms import SignUpForm
-# from FoodAPI.models import User
 from FoodAPI.models import Weather
+# from FoodAPI.models import User
 
 import random
 import requests
@@ -53,18 +51,14 @@ def signup(request):
         	user = authenticate(username=username, password=raw_password)
         	login(request, user)
         	return redirect('home')
-           	# username = request.POST.get('username', '')
-           	# email = request.POST.get('email', '')
-           	# password = request.POST.get('password', '')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
-    # return render(request, 'FoodAPI/signup.html', {'user_obj': user_obj,'is_registered':True }) # Redirect after POST
 
-# #the function executes with the showdata url to display the list of registered users
-# def showdata(request):
-#    all_users = User.objects.all()
-#    return render(request, 'registration/showdata.html', {'all_users': all_users, })
+#the function executes with the showdata url to display the list of registered users
+def showdata(request):
+   all_users = User.objects.all()
+   return render(request, 'registration/showdata.html', {'all_users': all_users, })
 
 def recipes(request):
 	weatherList = []
@@ -75,6 +69,7 @@ def recipes(request):
 		if zipcode == "":
 			parsedData2 = [['', 'Please input a valid zipcode', '', '', '', '']]
 			return render(request, 'FoodAPI/recipes.html', {'data': parsedData2})
+
 
 		w_zipcode = Weather.objects.all().filter(zipcode=zipcode)
 		if w_zipcode.exists():
@@ -89,6 +84,7 @@ def recipes(request):
 				parsedData2 = [['','Please input a valid zipcode','','','','']]
 				return render(request, 'FoodAPI/recipes.html', {'data': parsedData2})
 			jsonList = jsonList[0]["list"]
+
 			# jsonList holds a list of dictionaries, each dictionary holding some weather info like date, description, temp max, temp min, etc
 			for data in jsonList:
 				# we're getting nine days worth of results so for each of the days, we're only storing the following pieces of info into userData and then into weatherList
@@ -102,6 +98,7 @@ def recipes(request):
 				weather_obj = Weather(zipcode=zipcode, date=userData['date'], 
 					forecast=userData['forecast'], max_temp=userData['max'], 
 					min_temp=userData['min'], average_temp=userData['average'])
+
 				# saving all the data in the current object into the database
 				weather_obj.save()
 
@@ -121,14 +118,15 @@ def recipes(request):
 			current_date = date.today() + timedelta(days=(i))
 			priority1 = False
 			priority2 = False
-			#foodList selector
+
+			# foodList selector
 			foodList = []
 			average = weatherList[i]['average_temp']
 			average = float(average)
 			forecast = forecastList[i]['forecast']
 			forecast = forecast.title()
-			# forecast = forecast.encode('ascii', 'ignore')
 			forecast = str(forecast)
+
 			# Determine the season
 			Y = 2000  # dummy leap year to allow input X-02-29 (leap day)
 			seasons = [('winter', (date(Y, 1, 1), date(Y, 3, 20))),
@@ -241,8 +239,6 @@ def recipes(request):
 			i = i + 1
 		else:
 			i = i + 1
-
-	# returns recipes to html
-	# print(parsedData2)
+			
 	return render(request, 'FoodAPI/recipes.html', {'data':parsedData2})
 

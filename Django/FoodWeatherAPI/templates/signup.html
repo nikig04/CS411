@@ -1,57 +1,48 @@
 <!doctype html>
 
-      <html lang="en">
+<html lang="en">
 
-      <head>
+<head>
 
-        <title>Feather</title>
+    <title>Feather</title>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
-        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
-        <link rel="stylesheet" href="/static/styles/login.css" type="text/css">
-        <link type="text/css" rel="stylesheet" href="/static/styles/login.css" >
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles/login.css" type="text/css">
+    <link type="text/css" rel="stylesheet" href="/static/styles/login.css">
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
 
-      </head>
+</head>
+
 <body>
-  <div class="jumbo">
-    <!-- <div id="overlay"></div> -->
-      <div class="container is-Responsive" style= "background-color:white; padding:50px 30px 50px 80px ; opacity: 0.85;">
-         <div id= "text-container">          
-        {% extends 'base.html' %}
+    <div class="jumbo">
+        <div class="container is-Responsive" style="background-color:white; padding:50px 30px 50px 80px ; opacity: 0.85;">
+            <div id="text-container">
+                {% extends 'base.html' %} {% block content %}
+                <h2>Sign up</h2>
+                <form method="post">
+                    {% csrf_token %} {% for field in form %}
+                    <p>
+                        {{ field.label_tag }}
+                        <br> {{ field }} {% if field.help_text %}
+                        <small style="color: grey">{{ field.help_text }}</small> {% endif %} {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    </p>
+                    {% endfor %}
+                    <button type="submit">Sign up</button>
+                </form>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
 
-        {% block content %}
-          <h2>Sign up</h2>
-          <form method="post">
-            {% csrf_token %}
-            {% for field in form %}
-              <p>
-                {{ field.label_tag }}<br>
-                {{ field }}
-                {% if field.help_text %}
-                  <small style="color: grey">{{ field.help_text }}</small>
-                {% endif %}
-                {% for error in field.errors %}
-                  <p style="color: red">{{ error }}</p>
-                {% endfor %}
-              </p>
-            {% endfor %}
-            <button type="submit">Sign up</button>
-          </form>
-        {% endblock %}
-      </div>
-  </div>
-</div>
+</body>
 
-
-
-
-
- </body>
 </html>

@@ -1,8 +1,8 @@
 <!doctype html>
 
-  <html lang="en">
+<html lang="en">
 
-  <head>
+<head>
 
     <title>Feather</title>
 
@@ -11,41 +11,41 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="/static/styles/home.css" >
+    <link type="text/css" rel="stylesheet" href="/static/styles/home.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
 
-  </head>
+</head>
 
 <body>
     <div id="overlay"></div>
     <div id="page"></div>
-        <nav class="navbar navbar-default">
-            <div class="header">
-                <a href="/"><img src="/static/styles/img/logo.jpg" alt="logo" /></a>
+    <nav class="navbar navbar-default">
+        <div class="header">
+            <a href="/"><img src="/static/styles/img/logo.jpg" alt="logo" />
+            </a>
 
-            </div>
+        </div>
 
-            <div id="nav">
+        <div id="nav">
             <ul>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-            </ul>   
+                <li><a href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
         </div>
-        </nav>
+    </nav>
 
+    <div class="container">
+        <h2 align='center'>Welcome, <strong>{{ user.first_name }}</strong>!</h2>
 
-
-        <div class="container">
-            <h2 align='center'>Welcome, <strong>{{ user.first_name }}</strong>!</h2>
-<!--             <p style="font-size: 14px; color: black" align='center'>Your email address: {{ user.email }}</p> -->
-
-            <center><button class="btn btn-default box-shadow--3dp" style="background-color:#800000; color:white;"  type="submit" onclick="window.location.href='../FoodAPI/recipes'">Search For Recipes</button></center>
-        </div>
-       
-        
-
+        <center>
+            <button class="btn btn-default box-shadow--3dp" style="background-color:#800000; color:white;" type="submit" onclick="window.location.href='../FoodAPI/recipes'">Search For Recipes</button>
+        </center>
+    </div>
+    
     </div>
 </body>
+
 </html>

@@ -4,20 +4,6 @@ from django.db import models
 
 # Create your models here.
 
-# class User(models.Model):
-# 	# to store username
-# 	username = models.CharField(max_length=100)
-# 	# to store email
-# 	email = models.CharField(max_length=100)
-# 	# to store password
-# 	password = models.CharField(max_length=100)
-# 	# to store confirm password
-# 	# confirm_password = models.CharField(max_length=100)
-
-# 	# returns name of user when object of user is printed
-# 	def __str__(self):
-# 		return self.username
-
 class Weather(models.Model):
 
 	zipcode = models.CharField(max_length=20)
@@ -31,6 +17,20 @@ class Weather(models.Model):
 	def __str__(self):
 		# return '%s %s %s %s %s' % (self.date, self.forecast, self.max_temp, self.min_temp, self.average_temp)
 		return '%s' % (self.average_temp)
+
+# class User(models.Model):
+# 	# to store username
+# 	username = models.CharField(max_length=100)
+# 	# to store email
+# 	email = models.CharField(max_length=100)
+# 	# to store password
+# 	password = models.CharField(max_length=100)
+# 	# to store confirm password
+# 	# confirm_password = models.CharField(max_length=100)
+
+# 	# returns name of user when object of user is printed
+# 	def __str__(self):
+# 		return self.username
 
 # class Recipe(models.Model):
 # 	# foreign key connecting to weather table
