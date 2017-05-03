@@ -1,7 +1,19 @@
+Major aspects of project
+~Database: 
+Using Django's built in sqlite3 database, we added some packages like django_cron, social-auth-app-django, and its dependencies and made models that would add additional tables. Tables of interest are: 
+- FoodAPI_weather which is where we store the cached forecasts
+- FoodAPI_profile which is a table with a OneToOne relation with the User model in auth_user and stores dietary restrictions (made using Profile model)
+- auth_user is where we store all the user's information including username, password, and email
+- social_auth_usersocialauth which is where info on users who logged in using social authentication is stored
+~Authentication:
+Based of on Django's built in UserCreationForm, I modified it in SignUpForm to add extra fields and a Meta class. In views.py, the function that allow users to sign in and login are signup(). In there, I simply accessed form, saved form once fields are valid and save the dietary restriction information in Profile table. Logging in using Facebook was implemented with the help of social_auth_app_django.
+~Recipes Algorithm
+The core of our project is the recipes function in views.py which takes a class FoodList, user input based on weather for user-inputted zipcode, and randomizes recipe based on our algorithm. First, once user has inputted a zipcode, we check if it has been cached, if yes, we simple pull up the information, else we call the weather API. Then our algorithm takes the weather information, and using factors such as average temperature, seasons, time, and forecast (e.g. snow, rain) and calculates an appropriate list of recipes and randomly gives you a subset of the recipes. The recipes are displayed in a table for several days in advance (in case you plan on buying groceries and making lunches in advance).
+
+
 Future versions
 - ingredient list
 - favorite recipes
-
 
 
 Plans for a future version

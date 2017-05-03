@@ -14,16 +14,9 @@ class SignUpForm(UserCreationForm):
     vegan = forms.BooleanField(required=False)
     gluten_free = forms.BooleanField(required=False)
     dairy_free = forms.BooleanField(required=False)
-    # whole30 = forms.BooleanField(required=False)
-    # ketogenic = forms.BooleanField(required=False)
 
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', \
         	'vegetarian', 'vegan','gluten_free', 'dairy_free',)
 
-# class ProfileForm(forms.ModelForm):
-
-#     class Meta:
-#        	model = Profile
-#         fields = ('username', 'vegatarian', 'vegan')
