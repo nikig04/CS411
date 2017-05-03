@@ -71,6 +71,15 @@ def recipes(request):
 	userData = {}
 	jsonList = []
 	if request.POST:
+
+		current_user = request.user.id
+		vegetarianBool = Profile.objects.all().filter(user_id=current_user).values('vegetarian')
+		veganBool = Profile.objects.all().filter(user_id=current_user).values('vegan')
+		gluten_free = Profile.objects.all().filter(user_id=current_user).values('gluten_free')
+		dairy_free = Profile.objects.all().filter(user_id=current_user).values('dairy_free')
+		# for testing
+		print(vegetarianBool)
+		
 		zipcode = request.POST.get('da_input')  #here, we get the users input and assign it as our zipcode
 		if zipcode == "":
 			parsedData2 = [['', 'Please input a valid zipcode', '', '', '', '']] # if the zipcode is empty, tell them to input a zip code
