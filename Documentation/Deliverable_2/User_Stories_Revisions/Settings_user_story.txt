@@ -1,0 +1,1 @@
+We realized that there was no reason to include things like gender and age. The user indicates all supported food preferences and dietary restrictions upon signing up, so we did not include this part in our final product, as it wasn't really necessary.
