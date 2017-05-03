@@ -1,6 +1,9 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -18,19 +21,26 @@ class Weather(models.Model):
 		# return '%s %s %s %s %s' % (self.date, self.forecast, self.max_temp, self.min_temp, self.average_temp)
 		return '%s' % (self.average_temp)
 
-# class User(models.Model):
-# 	# to store username
-# 	username = models.CharField(max_length=100)
-# 	# to store email
-# 	email = models.CharField(max_length=100)
-# 	# to store password
-# 	password = models.CharField(max_length=100)
-# 	# to store confirm password
-# 	# confirm_password = models.CharField(max_length=100)
+class Profile(models.Model):
+	# to store username
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	# # to store location
+	# location = models.CharField(max_length=30, blank=True)
+	# to store if vegetarian
+	vegetarian = models.BooleanField(default=False)
+	# to store if vegan
+	vegan = models.BooleanField(default=False)
+	# to store if gluten_free
+	gluten_free = models.BooleanField(default=False)
+	# to store if dairy_free
+	dairy_free = models.BooleanField(default=False)
 
-# 	# returns name of user when object of user is printed
-# 	def __str__(self):
-# 		return self.username
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
+    
 
 # class Recipe(models.Model):
 # 	# foreign key connecting to weather table

@@ -185,29 +185,14 @@ body {
     }
     .container{
 
- /*         width: 200px;
-    height:100px;
-    font-size: 10px;
-    background: #ececec;
-    color:black;
-    vertical-align:middle;
-    display:table-cell;
-    text-align:center;
-      margin-right: auto;
-    margin-left: auto;
-}
-
-#container img {
-    vertical-align:middle;
-}*/
         bottom: 0;
-        height: 200px;
+        height: 240px;
         margin: auto;
         left: 0;
         position: absolute;
         right: 0;
         top: 0;
         background-color: white;
-        content: width: 35%; }
+        content: width: 25%; }
       
     }

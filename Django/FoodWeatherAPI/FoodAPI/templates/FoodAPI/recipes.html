@@ -52,7 +52,7 @@
                     <div class="col-sm-10 input-group" id="content">
                         <input type="text" name="da_input" class="form-control box-shadow--3dp" placeholder="e.g. 02215" id="search-input">
                         <div class="input-group-btn">
-                            <button class="btn btn-default box-shadow--3dp" onclick="waitingDialog.show(); setTimeout(function () {waitingDialog.hide();}, 5000);" id="search-btn" type="submit">Search</button>
+                            <button class="btn btn-default box-shadow--3dp" onclick="waitingDialog.show(); setTimeout(function () {waitingDialog.hide();}, 10000);" id="search-btn" type="submit">Search</button>
 
 
                         </div>
@@ -62,12 +62,7 @@
 
         </div>
         </div>
-
-
         <br>
-
-
-
         <div class="container">
             <table class="table table-bordered table-striped table-hover tablesorter table-reponsive">
                 <thead>
@@ -90,13 +85,11 @@
 
                     {% for key in data %}
                     <tr>
-                        {% for item in key %}
-                        <!-- {% if(item in key) -->
-                        <td> {{ item }}</td>
+                        {% for item in key %}                      
+                        <td> {{ item }}</td>                        
                         {% endfor %}
-                        <!--  <td>{{ key }} </td> -->
-
                     </tr>
+
                     {% endfor %}
 
                 </tbody>

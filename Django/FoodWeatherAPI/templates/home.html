@@ -39,6 +39,13 @@
 
     <div class="container">
         <h2 align='center'>Welcome, <strong>{{ user.first_name }}</strong>!</h2>
+        Your dietary restrictions are: 
+        <ul> 
+            <li> Vegetarian: {{ user.profile.vegetarian }} </li>
+            <li> Vegan: {{ user.profile.vegan }} </li>
+            <li> Gluten free: {{ user.profile.gluten_free }} </li>
+            <li> Dairy free: {{ user.profile.dairy_free }} </li>
+        </ul>
 
         <center>
             <button class="btn btn-default box-shadow--3dp" style="background-color:#800000; color:white;" type="submit" onclick="window.location.href='../FoodAPI/recipes'">Search For Recipes</button>

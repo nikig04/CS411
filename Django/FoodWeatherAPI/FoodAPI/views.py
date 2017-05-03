@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from FoodAPI.forms import SignUpForm
 from FoodAPI.models import Weather
-# from FoodAPI.models import User
+from FoodAPI.models import Profile
 
 import random
 import requests
@@ -45,15 +45,21 @@ def signup(request):
     if request.method == 'POST':  # if the form has been filled
         form = SignUpForm(request.POST)
         if form.is_valid():  # All the data is valid
-        	form.save()
-        	username = form.cleaned_data.get('username')
+        	user = form.save()
+        	user.refresh_from_db() # load the profile instance created by the signal
+        	user.profile.vegetarian = form.cleaned_data.get('vegetarian')
+        	user.profile.vegan = form.cleaned_data.get('vegan')
+        	user.profile.gluten_free = form.cleaned_data.get('gluten_free')
+        	user.profile.dairy_free = form.cleaned_data.get('dairy_free')
+        	user.save()
         	raw_password = form.cleaned_data.get('password1')
-        	user = authenticate(username=username, password=raw_password)
+        	user = authenticate(username=user.username, password=raw_password)
         	login(request, user)
         	return redirect('home')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
 
 #the function executes with the showdata url to display the list of registered users
 def showdata(request):
