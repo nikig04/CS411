@@ -19,7 +19,7 @@ class Vividict(dict):
 		value = self[key] = type(self)()
 		return value
 
-class FoodLists:
+class FoodLists: #Lists of food that we use for our recipe search, based on research online.
 	rain = ["stew", "buttermilk biscuit", "mac and cheese", "lasagna", "chili", "lentil soup", "grilled cheese",
 			"chocolate chip cookie", "baked beans"]
 	snow = ["mac and cheese", "roast chicken", "soup", "pasta", "hot chocolate", "pot pie", "muffin", "casserole"]
@@ -71,34 +71,34 @@ def recipes(request):
 	userData = {}
 	jsonList = []
 	if request.POST:
-		zipcode = request.POST.get('da_input')
+		zipcode = request.POST.get('da_input')  #here, we get the users input and assign it as our zipcode
 		if zipcode == "":
-			parsedData2 = [['', 'Please input a valid zipcode', '', '', '', '']]
+			parsedData2 = [['', 'Please input a valid zipcode', '', '', '', '']] # if the zipcode is empty, tell them to input a zip code
 			return render(request, 'FoodAPI/recipes.html', {'data': parsedData2})
 
 
 		w_zipcode = Weather.objects.all().filter(zipcode=zipcode)
-		if w_zipcode.exists():
+		if w_zipcode.exists(): #If the zipcode is in the database, just get the forecast and average_temp
 			weatherList = Weather.objects.all().filter(zipcode=zipcode).values('average_temp')
 			forecastList = Weather.objects.all().filter(zipcode=zipcode).values('forecast')
 
-		else:
-			req = requests.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipcode +",us&units=imperial&cnt=10&appid=e994992be112bc68c26ac350718dd773")
+		else: #If its not in the database, we have to add it
+			req = requests.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + zipcode +",us&units=imperial&cnt=10&appid=e994992be112bc68c26ac350718dd773") #hit the api to get the zip code weather info
 
 			jsonList.append(json.loads(req.content.decode("utf-8")))
 			if 'city not found' in jsonList[0].values():
-				parsedData2 = [['','Please input a valid zipcode','','','','']]
+				parsedData2 = [['','Please input a valid zipcode','','','','']] #If the api doesn't recognize the zip code, it must be invalid, so tell them to put in a valid zipcode.
 				return render(request, 'FoodAPI/recipes.html', {'data': parsedData2})
 			jsonList = jsonList[0]["list"]
 
 			# jsonList holds a list of dictionaries, each dictionary holding some weather info like date, description, temp max, temp min, etc
 			for data in jsonList:
-				# we're getting nine days worth of results so for each of the days, we're only storing the following pieces of info into userData and then into weatherList
+				# we're getting five days worth of results so for each of the days, we're only storing the following pieces of info into userData and then into weatherList
 				userData['date'] = data['dt']
 				userData['forecast'] = data['weather'][0]['description']
 				userData['max'] = data['temp']['max']
 				userData['min'] = data['temp']['min']
-				userData['average'] = round((userData['max'] + userData['min'])//2)
+				userData['average'] = round((userData['max'] + userData['min'])//2) #we use max and min to calculate the average temperature throughout the day
 				
 				# creating a weather object containing all the data
 				weather_obj = Weather(zipcode=zipcode, date=userData['date'], 
@@ -117,23 +117,23 @@ def recipes(request):
 	i = 1
 	parsedData2 = []	# once weatherList is filled, we iterate through it to get the average temp which is used to calculate types of food we want
 
-	#This loop is for every day of the 10 days
+	#This loop is for every day of the 5 days
 	while i < (len(weatherList)):
 		if i < 6:
 			# Get the date of i days ahead of today
 			current_date = date.today() + timedelta(days=(i))
-			priority1 = False
+			priority1 = False #Used in determine what recipes to search below
 			priority2 = False
 
 			# foodList selector
 			foodList = []
 			average = weatherList[i]['average_temp']
-			average = float(average)
+			average = float(average) #It comes out as a byte object, so convert to float so we can compare below
 			forecast = forecastList[i]['forecast']
 			forecast = forecast.title()
-			forecast = str(forecast)
+			forecast = str(forecast) #Convert so str
 
-			# Determine the season
+			# Table used to determine the season
 			Y = 2000  # dummy leap year to allow input X-02-29 (leap day)
 			seasons = [('winter', (date(Y, 1, 1), date(Y, 3, 20))),
 					   ('spring', (date(Y, 3, 21), date(Y, 6, 20))),
@@ -141,17 +141,17 @@ def recipes(request):
 					   ('autumn', (date(Y, 9, 23), date(Y, 12, 20))),
 					   ('winter', (date(Y, 12, 21), date(Y, 12, 31)))]
 
-			def get_season(now):
+			def get_season(now): #Determine the season
 				if isinstance(now, datetime):
 					now = now.date()
 				now = now.replace(year=Y)
 				return next(season for season, (start, end) in seasons
 							if start <= now <= end)
 
-			season = get_season(current_date)
+			season = get_season(current_date) #Based on the current date, find out what season it is.
 
 			# Analyze the forecast, season, and temperature and decide what recipes to search
-			if 'Drizzle' in forecast or 'Rain' in forecast:
+			if 'Drizzle' in forecast or 'Rain' in forecast: #If the forecast is rainy or snowy, we consider that highest priority and will search for recipes based on that forecast
 				priority1 = True
 				for ra in FoodLists.rain:
 					foodList.append(ra)
@@ -159,7 +159,7 @@ def recipes(request):
 				priority1 = True
 				for sn in FoodLists.snow:
 					foodList.append(sn)
-			if average >= 73 and priority1 == False:
+			if average >= 73 and priority1 == False:  #If the forecast was not rainy or snowy, then we look at the average temperature and decide if we should pick recipes if it is hot or cold
 				priority2 = True
 				for ho in FoodLists.hot:
 					foodList.append(ho)
@@ -168,7 +168,7 @@ def recipes(request):
 				for co in FoodLists.cold:
 					foodList.append(co)
 
-			if season == 'winter' and priority2 == False and priority1 == False:
+			if season == 'winter' and priority2 == False and priority1 == False: #If it is neither hot nor cold and neither rainy or snowy, we will simply check what season it is and return recipes with food from that season
 				for wi in FoodLists.winter:
 					foodList.append(wi)
 
@@ -185,11 +185,11 @@ def recipes(request):
 					foodList.append(au)
 
 			recipenum = 1
-			for y in range(3):
+			for y in range(3): #we want 3 recipes for each day, so this loop begins each recipe for this day
 				j = random.choice(foodList)
 				foodList.remove(j)
-				jsonList2 = []
-				#userData2 = Vividict()
+				jsonList2 = [] #Select a random food from the foodlist for the determined food for today, and find a recipe with that ingredient. Then, remove that ingredient from the foodList, because we don't want to recommend
+					       #Multiple recipes on the same day with the same ingredient
 				req = requests.get(
 					'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=' + j,
 					headers={
@@ -201,18 +201,18 @@ def recipes(request):
 				jsonList2.append(json.loads(req.content.decode("utf-8")))
 
 
-				for each_day in jsonList2:
+				for each_day in jsonList2: #jsonList2 will contain one recipe for one day
 					day_recipes = [current_date.strftime("%B %d, %Y") + " Recipe " + str(recipenum), average]
 					day_recipes.append(forecast)
 					k = 0
-					#This loop says for each recipe in each day
+					#This loop says for each recipe in each day. As of now, we just get one recipe for one day at a time
 					while k < len((each_day)['recipes']):
 						#Add the recipe title
 						day_recipes.append((each_day['recipes'][k]['title']))
 						#Add the recipe URL
 						day_recipes.append((each_day['recipes'][k]['spoonacularSourceUrl']))
 
-						#Add the recipe ingredients
+						#Add the recipe ingredients. We need to do some parsing...
 						z = 0
 						ingredients = ""
 						#for the list of ingredients for each recipe for each day
@@ -236,11 +236,12 @@ def recipes(request):
 						ingredients = ingredients.replace("u'", '')
 						ingredients = ingredients.replace("'", "")
 						ingredients = ingredients.replace(" ENDTAG", ", ")
-					
+						#Now, we can add the ingredients for this recipe
 						day_recipes.append(ingredients)
 
 						k = k + 1
 					recipenum += 1
+				#Now, we add the title, url and ingredients to our final list (ParsedData2) and then we move on to the next recipe or next day.
 				parsedData2.append(day_recipes)
 			i = i + 1
 		else:

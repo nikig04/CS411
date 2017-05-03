@@ -11,6 +11,5 @@ social-auth-app-django
 django_cron
 python-decouple
 
-# Feather Home Page
 
 
