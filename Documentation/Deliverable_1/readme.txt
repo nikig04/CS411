@@ -1,0 +1,1 @@
+For this deliverable, we've included the original pitch, and an updated final pitch that just gives a small overview of what we ended up going with and using for our app. More info about how the app works is in the Documentations folder as we explain the next few deliverables.

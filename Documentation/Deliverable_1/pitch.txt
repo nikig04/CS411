@@ -1,0 +1,27 @@
+CS411 Project Deliverable 1: Pitch
+Team 7: Monica Chiu, Dimitri Makrigiorgos, Nikita Gawande, Han Lu
+
+Main: Food/Weather App
+We would cross-reference food recipe APIs such as the Food, Yummly, and Meal
+Plantastic with popular weather APIs like Weather Underground, World Weather Online, and
+Forecast.io in order to provide recipe suggestions based on the weather. For example, if it’s
+going to be a really cold incoming week, the app would recommend recipes that are good for
+cold weather. If it’s rainy, it’d suggest recipes good for wet, rainy days and if it’s hot, it’d look
+for refreshing and cold foods. The benefits of making your own food vs eating out is evident as it
+is not only easier to make healthier choices but it is more budget-friendly. With this app,
+consumers who are trending towards more health-conscious and cost-friendly foods can buy
+groceriwes for the coming week and prepare meals in advance knowing full well what they
+would enjoy in the days to come. Main functionality is searching for recipes and suggestions for
+certain days of the week but extra stuff we’re thinking of including is a way to mark your
+favorite recipes, a way to edit items in your shopping list based on the recipes you’ve chosen,
+and local stores that stock the items/potential sales.
+
+Backup: Lucky Lunch App
+For the spontaneous and fun-loving consumers, this app could help pick out your lunch.
+The app generates a wheel or some sort of graphical design to help you decide where to get
+lunch! We can use the Yahoo Local Search API and input your zip code and optionally the
+type(s) of cuisine you want. With this information, a wheel with all the options near you will be
+generated and within seconds, will help you make a decision that would otherwise have taken
+you much longer. More functionality includes suggesting meals of the day in the area and/or 
+keeping track of your food history to make sure you’re not suggested to eat pizza or pasta every
+day of the week.

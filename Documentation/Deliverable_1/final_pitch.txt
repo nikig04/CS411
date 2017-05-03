@@ -1,0 +1,3 @@
+We went with the Food/Weather app from our original pitch.
+In the end, we corss-referenced the food API Spoonacular with the weather API Openweathermap. We got the forecast, temperature and season in a certain zip code, and returned 3 recipes each day for the next 5 days based on our search analysis.
+

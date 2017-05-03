@@ -1,0 +1,1 @@
+For this deliverable, we've included our initial user stories in the folder User_stories_First. We've also included a User_Stories_Revisions folder that shows how we revised the user stories for our final project.
