@@ -1,2 +1,1 @@
-This is our documentations folder. In here you can find the histroy of our five deliverables, along with the additional artifacts file, which contains information such as what we wanted to do for future versions, how our team communicated, how we tested, etc.
-The requirements for using our app are located in the requirements.txt folder, which is in the main directory.
+This is our documentations folder. In here you can find the histroy of our five deliverables, the requirements to run the app in the requirements.txt file, and the additional artifacts file, which contains information such as what we wanted to do for future versions, how our team communicated, how we tested, etc.
