@@ -31,6 +31,11 @@ class FoodLists: #Lists of food that we use for our recipe search, based on rese
 	winter = ["soup", "chili", "stew", "mac and cheese", "lasagna", "pot pie", "meatball", "quiche", "winter"]
 	autumn = ["cobbler", "squash", "pumpkin", "crumble", "pear", "blackberry", "brussels sprouts", "leek", "autumn"]
 	spring = ["apricot", "avocado", "asparagus", "strawberry", "salmon", "pea", "spring", "chicken", "snap pea"]
+	not_vegan = ["buttermilk biscuit", "mac and cheese", "grilled cheese", "roast chicken", "pork chop",
+				 "shrimp", "chicken salad", "sausage", "scallops", "hot dog", "meatball", "salmon", "chicken", "lobster"]
+	not_vegetarian = ["roast chicken", "pork chop", "shrimp", "chicken salad", "sausage", "scallops", "hot dog", "meatball",
+					  "salmon", "chicken"]
+	not_dairy_free = ["buttermilk biscuit", "mac and cheese", "grilled cheese"]
 
 
 def index(request):
@@ -73,13 +78,16 @@ def recipes(request):
 	if request.POST:
 
 		current_user = request.user.id
-		vegetarianBool = Profile.objects.all().filter(user_id=current_user).values('vegetarian')
-		veganBool = Profile.objects.all().filter(user_id=current_user).values('vegan')
+		vegetarian = Profile.objects.all().filter(user_id=current_user).values('vegetarian') #Get their dietary restrictions
+		vegan = Profile.objects.all().filter(user_id=current_user).values('vegan')
 		gluten_free = Profile.objects.all().filter(user_id=current_user).values('gluten_free')
 		dairy_free = Profile.objects.all().filter(user_id=current_user).values('dairy_free')
-		# for testing
-		print(vegetarianBool)
-		
+
+		vegetarian= vegetarian[0]['vegetarian']
+		vegan = vegan[0]['vegan']
+		gluten_free = gluten_free[0]['gluten_free']
+		dairy_free = dairy_free[0]['dairy_free']
+
 		zipcode = request.POST.get('da_input')  #here, we get the users input and assign it as our zipcode
 		if zipcode == "":
 			parsedData2 = [['', 'Please input a valid zipcode', '', '', '', '']] # if the zipcode is empty, tell them to input a zip code
@@ -128,6 +136,7 @@ def recipes(request):
 
 	#This loop is for every day of the 5 days
 	while i < (len(weatherList)):
+
 		if i < 6:
 			# Get the date of i days ahead of today
 			current_date = date.today() + timedelta(days=(i))
@@ -195,12 +204,28 @@ def recipes(request):
 
 			recipenum = 1
 			for y in range(3): #we want 3 recipes for each day, so this loop begins each recipe for this day
-				j = random.choice(foodList)
-				foodList.remove(j)
-				jsonList2 = [] #Select a random food from the foodlist for the determined food for today, and find a recipe with that ingredient. Then, remove that ingredient from the foodList, because we don't want to recommend
-					       #Multiple recipes on the same day with the same ingredient
+				if vegan:  												#before we pick a food from the list, we must remove any foods in the list that don't comply with this users dietary restrictions
+					for item in FoodLists.not_vegan: 					#these next few lines use our premade lists that identify any food that are either
+						while item in foodList: foodList.remove(item) 	#not vegan, not vegetarian, or not dairy free, and remove them from the food list
+				if vegetarian:											#if the user has any of these dietary restrictions
+					for item in FoodLists.not_vegetarian:
+						while item in foodList: foodList.remove(item)
+				if dairy_free:
+					for item in FoodLists.not_dairy_free:
+						while item in foodList: foodList.remove(item)
+				tags = random.choice(foodList)							#now that we have a proper foodList for this user, pick a random food
+				foodList.remove(tags)									#remove that ingredient from the foodList, because we don't want to recommend
+				if vegan:												#Multiple recipes on the same day with the same ingredient
+					tags += "%2C+vegan"
+				if vegetarian:
+					tags += "%2C+vegetarian"							#Now, add the proper tag to the api tags based on their restrictions
+				if gluten_free:
+					tags += "%2C+gluten+free"
+				if dairy_free:
+					tags += "%2C+dairy+free"
+				jsonList2 = []
 				req = requests.get(
-					'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=' + j,
+					'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=' + tags,  #finally, request a random recipe from the API with the tags we've given
 					headers={
 						"X-Mashape-Key": "Povx4QWmQlmshtcDOCYXxm8vjgMap1R7UvhjsnxZ2tUfwZjCmj",
 						"Accept": "application/json"
