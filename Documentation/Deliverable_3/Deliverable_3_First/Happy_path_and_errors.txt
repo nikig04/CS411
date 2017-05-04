@@ -1,0 +1,22 @@
+Happy Path:
+1A: Chooses local account / 1B: Chooses Google
+2A: Authentication request sent to database / 2B: Request app 
+3A: Returns token, authenticated with local credentials / 3B: Return app token
+(4-6 if choosing Google):
+4: Redirected to home page
+5: Google requests Login roken
+6: Authenticated through google
+7: Store session ID
+8: Complete --> Redirect with session
+
+
+Somethings that could go wrong:
+
+1- No account
+   Refreshes and redirects to a sign up page
+2- Incorrect password or username
+   Refreshes and allows re-enter of both for a period of 3 tries. After that there is a time out session. 
+   If there is a valid user attached to the username, an email is sent to that user informing about the situation.
+3- Forgot username and password
+   Refreshes and asked for email address to resend username or sends password
+

@@ -1,4 +1,4 @@
-Major aspects of project
+Explanation of the major aspects of the project
 ~Database: 
 Using Django's built in sqlite3 database, we added some packages like django_cron, social-auth-app-django, and its dependencies and made models that would add additional tables. Tables of interest are: 
 - FoodAPI_weather which is where we store the cached forecasts
@@ -6,14 +6,9 @@ Using Django's built in sqlite3 database, we added some packages like django_cro
 - auth_user is where we store all the user's information including username, password, and email
 - social_auth_usersocialauth which is where info on users who logged in using social authentication is stored
 ~Authentication:
-Based of on Django's built in UserCreationForm, I modified it in SignUpForm to add extra fields and a Meta class. In views.py, the function that allow users to sign in and login are signup(). In there, I simply accessed form, saved form once fields are valid and save the dietary restriction information in Profile table. Logging in using Facebook was implemented with the help of social_auth_app_django.
+Based off of Django's built in UserCreationForm, I modified it in SignUpForm to add extra fields and a Meta class. In views.py, the function that allow users to sign in and login are signup(). In there, I simply accessed form, saved form once fields are valid and save the dietary restriction information in Profile table. Logging in using Facebook was implemented with the help of social_auth_app_django.
 ~Recipes Algorithm
-The core of our project is the recipes function in views.py which takes a class FoodList, user input based on weather for user-inputted zipcode, and randomizes recipe based on our algorithm. First, once user has inputted a zipcode, we check if it has been cached, if yes, we simple pull up the information, else we call the weather API. Then our algorithm takes the weather information, and using factors such as average temperature, seasons, time, and forecast (e.g. snow, rain) and calculates an appropriate list of recipes and randomly gives you a subset of the recipes. The recipes are displayed in a table for several days in advance (in case you plan on buying groceries and making lunches in advance).
-
-
-Future versions
-- ingredient list
-- favorite recipes
+The core of our project is the recipes function in views.py which takes a zip code from user input and produces randomizes recipe based on our algorithm. First, once user has inputted a zipcode, we check if it has been cached, if it has, we simply pull up the information. Otherwise, we call the weather API. Then our algorithm takes the weather information, and using factors such as dietary preferences, average temperature, seasons, time, and forecast (e.g. snow, rain), calculates an appropriate list of food and randomly gives you a recipe containing food from the food list. The recipes are displayed in a table for 5 days in advance (in case you plan on buying groceries and making lunches in advance).
 
 
 Plans for a future version
@@ -34,6 +29,9 @@ https://docs.google.com/document/d/1G8cZnxkJ0SofauN4vVWsEap_rh1oIXSCJN9ymJgXfc0/
 We tested our final product essentially by trying to break it by going down an unhappy path. After we thought we had working fields, we would try and input unexpected inputs into each field to see if we could somehow cause bugs in things like the auth or the recipe search. 
 We found a few bugs like this, for example if a user just tried to search without entering a zip code, it would cause an error, so we had to fix things like that.
 
+One thing that we struggled with but are particularly proud of is the loading bar that appears when searching for recipes. We noticed that the search was taking about 8 seconds to complete because of the lag from the API request. So, based on what we learned from class
+about doing something if you know the user is going to have to wait, we implemented the loading bar that should distract the user for long enough to make the wait bearable. Its only an 8-10 second wait, so we didn't include anything more distracting because it doesn't 
+actually take that long, and the loading bar is satisfying to look at.
 
 Overall, the project went pretty well, we did a good job of planning ahead of time and keeping on task so we felt prepared the whole way through. We ran into some issues with estimating how long things would take; for example, auth turned out to be much harder than we thought
 it would be, so some people ended up working for longer than others did after we had planned tasks. Overall though, we feel like we did a good job, since we came into this with no experience with Django or how to make a web app.
