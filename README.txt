@@ -7,7 +7,12 @@ You may find further information about Feather in the "Documentation" folder of 
 
 Packages to install are included in Documentation under the name, 'requirements.txt'
 
-Note: As this app has yet to be live, everything is run under localhost using a virtual environment with Python and Django framework. Once you have the env set up, simply go to Django/FoodWeatherAPI and enter: python manage.py runserver, then go to http://localhost:8000/ and the site will be up!
+Note: 
+As this app has yet to be live, everything is run under localhost using a virtual environment with Python and Django framework. Once you have the env set up, simply go to Django/FoodWeatherAPI and enter: python manage.py runserver, then go to http://localhost:8000/ and the site will be up!
+
+Also, we had setup a cronjob that can be activated by running:
+python manage.py runcrons. This is to clear the database so new weather information can be entered.
+
 
 
 
